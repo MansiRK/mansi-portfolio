@@ -33,8 +33,10 @@
 }
 
 /* Semantic tokens: components use these, so they switch with the theme */
+/* `.theme-reset` restores the page tokens inside an `.inverse-theme` band (e.g. the contact form card) */
 :root,
-[data-theme="light"] {
+[data-theme="light"],
+[data-theme="light"] .theme-reset {
   color-scheme: light;
   --bg: var(--light-gray-text);
   --surface: var(--secondary-light-bg);
@@ -63,10 +65,12 @@
   --icon-bg: #FAE8FF;
   --icon-fg: var(--ternary-light-text);
   --chip-bg: #EEE6F8;
+  --field-bg: #F7F2FD;
   --chip-text: var(--light-title-text);
 }
 
-[data-theme="dark"] {
+[data-theme="dark"],
+[data-theme="dark"] .theme-reset {
   color-scheme: dark;
   --bg: var(--secondary-dark-bg);
   --surface: #211A2E;
@@ -95,6 +99,7 @@
   --icon-bg: #3A1530;
   --icon-fg: var(--dark-button-bg);
   --chip-bg: #221B2E;
+  --field-bg: var(--secondary-dark-bg);
   --chip-text: var(--secondary-dark-text);
 }
 
@@ -126,6 +131,7 @@
   --color-icon-bg: var(--icon-bg);
   --color-icon-fg: var(--icon-fg);
   --color-chip-bg: var(--chip-bg);
+  --color-field-bg: var(--field-bg);
   --color-chip-text: var(--chip-text);
   --font-sans: var(--primary-font);
   --font-display: var(--secondary-font);
@@ -190,5 +196,62 @@
     background: var(--bg);
     color: var(--text);
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* Odometer "minimal" theme (from the odometer package, minus its old-IE hacks that the CSS parser rejects) */
+.odometer.odometer-theme-minimal,
+.odometer.odometer-theme-minimal .odometer-digit {
+  display: inline-block;
+  vertical-align: baseline;
+  position: relative;
+}
+
+.odometer.odometer-theme-minimal .odometer-digit .odometer-digit-spacer {
+  display: inline-block;
+  visibility: hidden;
+}
+
+.odometer.odometer-theme-minimal .odometer-digit .odometer-digit-inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  text-align: left;
+}
+
+.odometer.odometer-theme-minimal .odometer-digit .odometer-ribbon,
+.odometer.odometer-theme-minimal .odometer-digit .odometer-ribbon-inner,
+.odometer.odometer-theme-minimal .odometer-digit .odometer-value {
+  display: block;
+}
+
+.odometer.odometer-theme-minimal .odometer-digit .odometer-value.odometer-last-value {
+  position: absolute;
+}
+
+.odometer.odometer-theme-minimal.odometer-animating-up .odometer-ribbon-inner {
+  transition: transform 2s;
+}
+
+.odometer.odometer-theme-minimal.odometer-animating-up.odometer-animating .odometer-ribbon-inner,
+.odometer.odometer-theme-minimal.odometer-animating-down .odometer-ribbon-inner {
+  transform: translateY(-100%);
+}
+
+.odometer.odometer-theme-minimal.odometer-animating-down.odometer-animating .odometer-ribbon-inner {
+  transition: transform 2s;
+  transform: translateY(0);
+}
+
+/* Banner intro: hidden until GSAP plays it (see ScrollAnimations). The delayed animation is a
+   failsafe that shows everything after 3s if the script never runs. */
+html.motion [data-hero] {
+  visibility: hidden;
+  animation: hero-failsafe 0s 3s forwards;
+}
+
+@keyframes hero-failsafe {
+  to {
+    visibility: visible;
   }
 }

@@ -2,16 +2,17 @@
 
 import { useEffect, useRef } from "react";
 import { LuX } from "react-icons/lu";
+import { getLenis } from "../lib/lenis";
 import SocialLinks from "./SocialLinks";
 
 const MENU_ITEMS = [
   { label: "About me", href: "#about" },
-  { label: "What I do", href: "#services" },
-  { label: "My skills", href: "#skills" },
-  { label: "My process", href: "#process" },
+  { label: "By the numbers", href: "#numbers" },
   { label: "Selected works", href: "#works" },
   { label: "Education & experience", href: "#experience" },
-  { label: "By the numbers", href: "#numbers" },
+  { label: "My skills", href: "#skills" },
+  { label: "What I do", href: "#services" },
+  { label: "My process", href: "#process" },
   { label: "Let's work together", href: "#contact" },
 ];
 
@@ -29,6 +30,7 @@ export default function SideBar({ open, onClose }: SideBarProps) {
     closeButtonRef.current?.focus();
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    getLenis()?.stop();
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") onClose();
@@ -37,12 +39,14 @@ export default function SideBar({ open, onClose }: SideBarProps) {
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      getLenis()?.start();
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [open, onClose]);
 
   return (
     <div
+      data-lenis-prevent
       className={`fixed inset-0 z-50 transition-[visibility] ${open ? "visible" : "invisible delay-500"}`}
       inert={!open}
     >
@@ -104,7 +108,7 @@ export default function SideBar({ open, onClose }: SideBarProps) {
           </nav>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-2">
           <p className="max-w-60 text-sm leading-relaxed text-text">
             A quick map of who I am, what I build and how to reach me.
           </p>

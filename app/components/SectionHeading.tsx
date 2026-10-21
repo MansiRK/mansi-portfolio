@@ -1,16 +1,18 @@
 type SectionTitleProps = {
   id: string;
-  title: string;
-  highlight: string;
+  title: React.ReactNode;
+  highlight: React.ReactNode;
+  /** Extra classes for the heading, e.g. a responsive size override */
+  className?: string;
 };
 
 /** Two-line display title with the short rule underneath, shared by every section */
-export function SectionTitle({ id, title, highlight }: SectionTitleProps) {
+export function SectionTitle({ id, title, highlight, className = "" }: SectionTitleProps) {
   return (
     <div>
       <h2
         id={id}
-        className="font-display text-[clamp(2rem,1rem+5vw,6rem)] font-extrabold uppercase leading-[0.9] text-title"
+        className={`font-display text-[clamp(1.75rem,0.25rem+5.75vw,6rem)] font-extrabold uppercase leading-[0.9] text-title ${className}`}
       >
         {title}
         <span className="block text-accent">{highlight}</span>
@@ -29,7 +31,7 @@ type SectionHeadingProps = SectionTitleProps & {
 /** Section title on the left with a short description on the right */
 export default function SectionHeading({ id, title, highlight, description, decoration }: SectionHeadingProps) {
   return (
-    <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+    <div data-reveal-group className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
       <SectionTitle id={id} title={title} highlight={highlight} />
 
       <div className="max-w-sm lg:pb-6">

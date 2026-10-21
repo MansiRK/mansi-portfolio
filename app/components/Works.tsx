@@ -17,7 +17,7 @@ export default function Works() {
     <section
       id="works"
       aria-labelledby="works-title"
-      className="site-container scroll-mt-6 bg-section-alt py-20 lg:py-28 dark:bg-bg"
+      className="site-container scroll-mt-6 bg-surface py-20 lg:py-28 dark:bg-bg"
     >
       <SectionHeading
         id="works-title"
@@ -26,7 +26,7 @@ export default function Works() {
         description="Production work for real clients across real estate, manufacturing and finance. Open any project to see the details."
       />
 
-      <div role="group" aria-label="Filter projects" className="mt-10 flex flex-wrap gap-2">
+      <div role="group" aria-label="Filter projects" data-reveal="up" className="mt-10 flex flex-wrap gap-2">
         {FILTERS.map(({ value, label }) => {
           const count = value === "all" ? PROJECTS.length : PROJECTS.filter((p) => p.filter === value).length;
           const active = filter === value;
@@ -49,7 +49,7 @@ export default function Works() {
         })}
       </div>
 
-      <ul className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      <ul data-reveal-group className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((project, index) => (
           <li key={project.title}>
             <button

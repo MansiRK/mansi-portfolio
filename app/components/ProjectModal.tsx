@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { LuArrowLeft, LuArrowRight, LuExternalLink, LuGithub, LuX } from "react-icons/lu";
+import { getLenis } from "../lib/lenis";
 import type { Project } from "../lib/projects";
 import ProjectShot from "./ProjectShot";
 
@@ -20,8 +21,12 @@ export default function ProjectModal({ projects, index, onNavigate, onClose }: P
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
-    if (project && !dialog.open) dialog.showModal();
+    if (project && !dialog.open) {
+      dialog.showModal();
+      getLenis()?.stop(); // freeze the page behind the modal
+    }
     if (!project && dialog.open) dialog.close();
+    if (!project) getLenis()?.start();
   }, [project]);
 
   const total = projects.length;
@@ -32,6 +37,7 @@ export default function ProjectModal({ projects, index, onNavigate, onClose }: P
   return (
     <dialog
       ref={dialogRef}
+      data-lenis-prevent // let the modal content scroll natively
       aria-labelledby="project-title"
       onClose={onClose}
       onClick={(event) => {
@@ -42,10 +48,10 @@ export default function ProjectModal({ projects, index, onNavigate, onClose }: P
         if (event.key === "ArrowLeft") go(-1);
         if (event.key === "ArrowRight") go(1);
       }}
-      className="inverse-theme m-auto max-h-[calc(100dvh-2rem)] w-[min(100%-2rem,72rem)] overflow-y-auto bg-(--inverse-bg) text-text backdrop:bg-black/60 backdrop:backdrop-blur-sm"
+      className="inverse-theme m-auto max-h-[calc(100dvh-2rem)] w-[min(100%-2rem,96rem)] overflow-y-auto bg-(--inverse-bg) text-text backdrop:bg-black/60 backdrop:backdrop-blur-sm"
     >
       {project && index !== null && (
-        <div className="relative p-6 sm:p-10">
+        <div className="relative p-6 sm:p-10 xl:p-14">
           <button
             type="button"
             onClick={onClose}
@@ -83,7 +89,7 @@ function ProjectDetails({ project }: { project: Project }) {
   const highlight = words.pop();
 
   return (
-    <div className="grid gap-10 lg:grid-cols-2">
+    <div className="grid gap-10 lg:grid-cols-2 xl:gap-16">
       <div>
         <p className="text-xs font-semibold text-accent">{project.category}</p>
         <h2
@@ -95,7 +101,7 @@ function ProjectDetails({ project }: { project: Project }) {
         </h2>
         <span className="mt-5 block h-0.5 w-10 bg-rule" />
 
-        <p className="mt-5 max-w-md text-sm leading-relaxed sm:text-base">{project.summary}</p>
+        <p className="mt-5 max-w-xl text-sm leading-relaxed sm:text-base">{project.summary}</p>
 
         {project.highlights.length > 0 && (
           <ul className="mt-5 space-y-2.5">
@@ -149,7 +155,8 @@ function ProjectDetails({ project }: { project: Project }) {
         )}
       </div>
 
-      <div>
+      {/* Pushed down on desktop so the close button never covers the image */}
+      <div className="lg:pt-10">
         <ProjectShot
           project={project}
           image={project.images[activeImage]}

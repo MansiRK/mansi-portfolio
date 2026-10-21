@@ -40,7 +40,7 @@ export default function WhatIDo() {
           decoration={<DotWave />}
         />
 
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <ul data-reveal-group className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {SERVICES.map((service) => (
             <li
               key={service.title}
@@ -78,7 +78,7 @@ function DotWave() {
   }
 
   return (
-    <svg viewBox="0 0 170 76" className="ml-auto w-44" aria-hidden="true">
+    <svg viewBox="0 0 170 76" data-parallax="0.3" className="ml-auto w-44" aria-hidden="true">
       <g className="fill-window-line">{dots}</g>
       <path d="M4 60c20 0 26-18 46-18s24 16 44 16 26-30 46-30 18 8 26 8" fill="none" className="stroke-accent dark:stroke-button" strokeWidth="2" strokeLinecap="round" />
       <rect x="146" y="4" width="16" height="16" className="fill-accent dark:fill-button" />

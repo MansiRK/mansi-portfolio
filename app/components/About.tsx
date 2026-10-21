@@ -2,7 +2,7 @@ import { PROFILE } from "../lib/profile";
 import { SectionTitle } from "./SectionHeading";
 import SocialLinks from "./SocialLinks";
 import Image from "next/image";
-import aboutImg from "@/public/images/about_img.png";
+import aboutImg from "@/public/images/about_img1.png";
 
 const DETAILS = [
   { label: "Email", value: PROFILE.email, href: `mailto:${PROFILE.email}` },
@@ -16,7 +16,7 @@ export default function About() {
       aria-labelledby="about-title"
       className="site-container grid scroll-mt-6 items-center gap-12 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28"
     >
-      <div>
+      <div data-reveal-group>
         <SectionTitle id="about-title" title="About" highlight="Me" />
 
         <p className="mt-8 max-w-lg text-base leading-relaxed text-title sm:text-lg">
@@ -33,7 +33,7 @@ export default function About() {
         <SocialLinks className="mt-8" />
       </div>
 
-      <div className="overflow-hidden border border-border shadow-xl">
+      <div data-reveal="image" className="overflow-hidden border border-border shadow-xl">
         {/* `fill` sizes the image to this box (needs `relative` + a fixed shape).
             object-contain keeps the whole figure visible; object-cover would zoom in and crop it. */}
         <div className="relative aspect-square max-h-120 w-full bg-surface">

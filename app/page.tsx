@@ -1,8 +1,14 @@
 import About from "./components/About";
 import Banner from "./components/Banner";
+import Contact from "./components/Contact";
+import EducationExperience from "./components/EducationExperience";
 import Header from "./components/Header";
+import Numbers from "./components/Numbers";
 import Process from "./components/Process";
+import ScrollAnimations from "./components/ScrollAnimations";
+import ScrollToTop from "./components/ScrollToTop";
 import Skills from "./components/Skills";
+import SmoothScroll from "./components/SmoothScroll";
 import WhatIDo from "./components/WhatIDo";
 import Works from "./components/Works";
 
@@ -12,10 +18,16 @@ export default function Home() {
       <Header />
       <Banner />
       <About />
-      <WhatIDo />
-      <Skills />
-      <Process />
+      <Numbers />
       <Works />
+      <EducationExperience />
+      <Skills />
+      <WhatIDo />
+      <Process />
+      <Contact />
+      <ScrollToTop />
+      <SmoothScroll />
+      <ScrollAnimations />
     </main>
   );
 }

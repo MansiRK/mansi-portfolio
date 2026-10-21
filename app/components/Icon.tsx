@@ -1,4 +1,4 @@
-import { LuCodeXml, LuDatabase, LuPanelsTopLeft, LuSearch, LuServer, LuWrench } from "react-icons/lu";
+import { LuBriefcase, LuCodeXml, LuDatabase, LuGraduationCap, LuPanelsTopLeft, LuSearch, LuServer, LuWrench } from "react-icons/lu";
 
 const ICONS = {
   code: LuCodeXml,
@@ -7,6 +7,8 @@ const ICONS = {
   search: LuSearch,
   database: LuDatabase,
   wrench: LuWrench,
+  briefcase: LuBriefcase,
+  graduation: LuGraduationCap,
 };
 
 export type IconName = keyof typeof ICONS;

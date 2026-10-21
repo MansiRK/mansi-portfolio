@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="site-container flex items-center justify-between gap-4 py-5 text-xs sm:text-sm">
+      <header data-hero="header" className="site-container flex items-center justify-between gap-4 py-5 text-xs sm:text-sm">
         <p className="text-text">MERN Stack Developer</p>
 
         <div className="flex items-center gap-3 sm:gap-4">

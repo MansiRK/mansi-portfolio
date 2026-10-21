@@ -19,8 +19,9 @@ export const metadata: Metadata = {
     "I build fast, SEO-friendly web apps, CMS platforms and dashboards that clients run in production.",
 };
 
-// Applies the saved (or system) theme before first paint to avoid a flash
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
+// Before first paint: apply the saved (or system) theme, and flag that intro animations will run
+// (`motion` class hides the banner elements until GSAP reveals them)
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("motion")})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

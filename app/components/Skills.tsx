@@ -34,7 +34,7 @@ export default function Skills() {
         description="The tools I reach for every day, grouped by where they sit in the stack."
       />
 
-      <ul className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      <ul data-reveal-group className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
         {SKILL_GROUPS.map((group) => (
           <li key={group.title} className="border border-border bg-card-bg p-6">
             <div className="flex items-center gap-3">

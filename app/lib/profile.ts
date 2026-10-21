@@ -1,8 +1,9 @@
-// TODO: replace the placeholder contact details and profile URLs with real ones
+// TODO: replace the placeholder GitHub and LinkedIn profile URLs with real ones
 export const PROFILE = {
   name: "Mansi Kamble",
-  email: "mansikamble@gmail.com",
+  email: "mansikamble1110@gmail.com",
+  phone: "+91 95790 68536",
   location: "Virar, Maharashtra",
-  github: "https://github.com/",
-  linkedin: "https://www.linkedin.com/",
+  github: "https://github.com/MansiRK",
+  linkedin: "https://www.linkedin.com/in/mansi-kamble",
 };

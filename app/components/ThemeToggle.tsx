@@ -31,13 +31,13 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle dark mode"
-      className="flex items-center gap-0.5 hover:cursor-pointer rounded-full border border-border bg-pill-bg p-0.5 px-1 transition-colors"
+      className="flex items-center gap-0.5 hover:cursor-pointer rounded-full border border-border bg-pill-bg p-1 transition-colors"
     >
-      <span className="grid size-6 place-items-center rounded-full bg-accent text-white transition-colors dark:bg-transparent dark:text-text">
-        <LuSun className="size-3.5" aria-hidden="true" />
+      <span className="grid size-8 place-items-center rounded-full bg-accent text-white transition-colors dark:bg-transparent dark:text-text">
+        <LuSun className="size-4.5" aria-hidden="true" />
       </span>
-      <span className="grid size-6 place-items-center rounded-full text-text transition-colors dark:bg-button dark:text-white">
-        <LuMoon className="size-3.5" aria-hidden="true" />
+      <span className="grid size-8 place-items-center rounded-full text-text transition-colors dark:bg-button dark:text-white">
+        <LuMoon className="size-4.5" aria-hidden="true" />
       </span>
     </button>
   );

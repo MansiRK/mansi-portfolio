@@ -277,15 +277,6 @@ html.has-custom-cursor :is(input, textarea) {
   cursor: text;
 }
 
-/* The project modal sits in the browser's top layer, above the custom cursor, so use the native one there */
-html.has-custom-cursor:has(dialog[open]) * {
-  cursor: auto;
-}
-
-html:has(dialog[open]) .custom-cursor {
-  display: none;
-}
-
 .cursor-ring {
   transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease, scale 0.15s ease;
 }

@@ -73,8 +73,9 @@ export default function Works() {
               <ProjectShot
                 project={project}
                 image={project.cover ?? project.gallery?.[0]?.desktop}
+                darkImage={project.coverDark}
                 sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
-                className="aspect-16/10 transition-transform duration-300 group-hover:-translate-y-1"
+                className="transition-transform duration-300 group-hover:-translate-y-1"
               />
 
               <div className="mt-4 flex items-start gap-3">

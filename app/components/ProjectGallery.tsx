@@ -1,83 +1,82 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import type { Project } from "../lib/projects";
-import ProjectShot from "./ProjectShot";
+import ProjectShot, { DeviceMockup } from "./ProjectShot";
 
 type Shot = { src: string; page: string; device: "Desktop" | "Mobile" };
 
 /**
- * Project screenshots in the modal: the selected screenshot in a browser window, and a row of
- * thumbnails underneath with left/right arrows when there are more than fit (3 at a time).
+ * Project screenshots in the modal: the selected screenshot on top and a row of thumbnails
+ * underneath. The arrows step to the previous/next screenshot and the row follows the active one.
  * Every page contributes its desktop shot and, if it has one, its mobile shot.
  * Without a gallery it falls back to the cover (or the plain gradient frame).
  */
 export default function ProjectGallery({ project }: { project: Project }) {
   const shots: Shot[] = (project.gallery ?? []).flatMap((page) => [
-    { src: page.desktop, page: page.title, device: "Desktop" as const },
+    ...(page.desktop ? [{ src: page.desktop, page: page.title, device: "Desktop" as const }] : []),
     ...(page.mobile ? [{ src: page.mobile, page: page.title, device: "Mobile" as const }] : []),
   ]);
   const [active, setActive] = useState(0);
   const rowRef = useRef<HTMLDivElement>(null);
-  // Whether the thumbnail row is scrolled to its start/end; both true means everything fits
-  const [edges, setEdges] = useState({ start: true, end: true });
 
-  const updateEdges = useCallback(() => {
-    const row = rowRef.current;
-    if (!row) return;
-    setEdges({
-      start: row.scrollLeft <= 1,
-      end: row.scrollLeft + row.clientWidth >= row.scrollWidth - 1,
-    });
-  }, []);
-
-  // The observer also fires once on observe, which sets the initial state
+  // Scroll the thumbnail row just enough to keep the active thumbnail in view
   useEffect(() => {
     const row = rowRef.current;
-    if (!row) return;
-    const observer = new ResizeObserver(updateEdges);
-    observer.observe(row);
-    return () => observer.disconnect();
-  }, [updateEdges, shots.length]);
+    const thumb = row?.children[active] as HTMLElement | undefined;
+    if (!row || !thumb) return;
+    const left = thumb.offsetLeft;
+    const right = left + thumb.offsetWidth;
+    if (left < row.scrollLeft) row.scrollTo({ left, behavior: "smooth" });
+    else if (right > row.scrollLeft + row.clientWidth) row.scrollTo({ left: right - row.clientWidth, behavior: "smooth" });
+  }, [active]);
 
   if (shots.length === 0) {
     return (
-      <ProjectShot project={project} image={project.cover} sizes="(min-width: 1024px) 40vw, 90vw" className="aspect-16/11" />
+      <ProjectShot project={project} image={project.cover} darkImage={project.coverDark} sizes="(min-width: 1024px) 40vw, 90vw" />
     );
   }
 
   const shot = shots[active];
-  const scrollRow = (direction: 1 | -1) => {
-    const row = rowRef.current;
-    row?.scrollBy({ left: direction * row.clientWidth, behavior: "smooth" });
-  };
-  const hasOverflow = !(edges.start && edges.end);
+  const alt = `${project.title}, ${shot.page} page on ${shot.device.toLowerCase()}`;
 
   return (
     <div>
-      {/* Main view; key resets the window's scroll position when switching screenshots */}
-      <div key={shot.src} className="relative aspect-video">
-        <Window shot={shot} alt={`${project.title}, ${shot.page} page on ${shot.device.toLowerCase()}`} />
+      {/* Main view, the same height for both devices: the box has the browser frame's shape and the
+          phone fills its height. The key restarts the image load when switching screenshots. */}
+      <div key={shot.src} className="relative aspect-[2960/1570]">
+        {shot.device === "Desktop" ? (
+          <DeviceMockup device="desktop" src={shot.src} alt={alt} sizes="(min-width: 1024px) 45vw, 95vw" className="w-full" />
+        ) : (
+          <DeviceMockup
+            device="mobile"
+            src={shot.src}
+            alt={alt}
+            sizes="(min-width: 1024px) 15vw, 35vw"
+            className="absolute inset-y-0 left-1/2 h-full -translate-x-1/2"
+          />
+        )}
       </div>
       <p className="mt-2 text-xs text-text">
         {shot.page} · {shot.device}
+        <span className="float-right tabular-nums">
+          {active + 1} / {shots.length}
+        </span>
       </p>
 
       {shots.length > 1 && (
         <div className="mt-3 flex items-center gap-2">
-          {hasOverflow && (
-            <ArrowButton label="Previous screenshots" disabled={edges.start} onClick={() => scrollRow(-1)}>
-              <LuChevronLeft />
-            </ArrowButton>
-          )}
+          <ArrowButton label="Previous screenshot" disabled={active === 0} onClick={() => setActive(active - 1)}>
+            <LuChevronLeft />
+          </ArrowButton>
+          {/* Every thumbnail is as tall as a desktop one (3 of those fill the row); mobile ones keep their phone shape */}
           <div
             ref={rowRef}
             role="group"
             aria-label="Screenshots"
-            onScroll={updateEdges}
-            className="flex min-w-0 flex-1 snap-x gap-3 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="@container relative flex min-w-0 flex-1 gap-3 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {shots.map((item, index) => (
               <button
@@ -86,24 +85,17 @@ export default function ProjectGallery({ project }: { project: Project }) {
                 onClick={() => setActive(index)}
                 aria-label={`Show ${item.page} (${item.device.toLowerCase()})`}
                 aria-pressed={index === active}
-                className={`relative aspect-16/10 w-[calc((100%-1.5rem)/3)] shrink-0 snap-start overflow-hidden border-2 bg-white transition-colors ${
-                  index === active ? "border-accent" : "border-border hover:border-accent/60"
-                }`}
+                className={`relative h-[calc((100cqw-1.5rem)/3*5/11)] shrink-0 overflow-hidden border-2 transition-[border-color,opacity] ${
+                  item.device === "Mobile" ? "aspect-[9/16]" : "aspect-[11/5]"
+                } ${index === active ? "border-accent" : "border-border opacity-60 hover:border-accent/60 hover:opacity-100"}`}
               >
                 <Image src={item.src} alt="" fill sizes="12vw" className="object-cover object-top" />
-                {item.device === "Mobile" && (
-                  <span className="absolute bottom-1 left-1 bg-black/60 px-1.5 py-0.5 text-[9px] font-semibold text-white">
-                    Mobile
-                  </span>
-                )}
               </button>
             ))}
           </div>
-          {hasOverflow && (
-            <ArrowButton label="Next screenshots" disabled={edges.end} onClick={() => scrollRow(1)}>
-              <LuChevronRight />
-            </ArrowButton>
-          )}
+          <ArrowButton label="Next screenshot" disabled={active === shots.length - 1} onClick={() => setActive(active + 1)}>
+            <LuChevronRight />
+          </ArrowButton>
         </div>
       )}
     </div>
@@ -131,30 +123,5 @@ function ArrowButton({
     >
       {children}
     </button>
-  );
-}
-
-/**
- * Browser window with a small dot bar on top. Desktop shots fill the frame; mobile shots get a
- * narrow, phone-width window in the centre. Tall screenshots can be scrolled inside the window.
- */
-function Window({ shot, alt }: { shot: Shot; alt: string }) {
-  const mobile = shot.device === "Mobile";
-
-  return (
-    <div
-      className={`absolute inset-y-0 flex flex-col border border-border bg-white ${
-        mobile ? "left-1/2 w-[26%] -translate-x-1/2" : "inset-x-0"
-      }`}
-    >
-      <div className="flex shrink-0 gap-[3%] px-[3%] py-[2.5%]" aria-hidden="true">
-        {[0, 1, 2].map((dot) => (
-          <span key={dot} className={`aspect-square rounded-full bg-[#C9B8E8] ${mobile ? "w-[7%]" : "w-[1.4%]"}`} />
-        ))}
-      </div>
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-        <Image src={shot.src} alt={alt} width={1440} height={900} sizes="(min-width: 1024px) 40vw, 90vw" className="block h-auto w-full" />
-      </div>
-    </div>
   );
 }

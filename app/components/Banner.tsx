@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { LuDownload } from "react-icons/lu";
+import { LuArrowRight, LuDownload } from "react-icons/lu";
 import { buttonSweep } from "../lib/ui";
 import profileBanner from "@/public/images/profile_banner1.png";
 
@@ -60,9 +60,10 @@ export default function Banner() {
           <div data-hero="text" className="mt-6 flex flex-wrap gap-3">
             <a
               href="#works"
-              className={`${buttonSweep} bg-button px-5 py-2.5 text-base font-semibold text-white [--sweep:var(--title)] dark:hover:text-bg`}
+              className={`${buttonSweep} flex items-center gap-2 bg-button px-5 py-2.5 text-base font-semibold text-white [--sweep:var(--title)] dark:hover:text-bg`}
             >
               View My Work
+              <LuArrowRight className="size-4" aria-hidden="true" />
             </a>
             {/* TODO: add the CV file to /public */}
             <a

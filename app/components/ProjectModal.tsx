@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { LuArrowLeft, LuArrowRight, LuExternalLink, LuGithub, LuX } from "react-icons/lu";
+import { LuArrowLeft, LuArrowRight, LuExternalLink, LuX } from "react-icons/lu";
 import { getLenis } from "../lib/lenis";
 import type { Project } from "../lib/projects";
 import { buttonSweep } from "../lib/ui";
@@ -90,13 +90,14 @@ function ProjectDetails({ project }: { project: Project }) {
 
   return (
     <div className="grid gap-10 lg:grid-cols-2 xl:gap-16">
-      <div>
+      {/* Container, so the title scales with this column and long words like "Management" always fit */}
+      <div className="@container min-w-0">
         <p className="text-xs font-semibold text-accent">
           {project.kind} · {project.category === "client" ? "Client project" : "Personal project"}
         </p>
         <h2
           id="project-title"
-          className="mt-3 font-display text-[clamp(2rem,1rem+3vw,3.75rem)] font-extrabold uppercase leading-[0.9] text-title"
+          className="mt-3 font-display text-[clamp(1.25rem,7.5cqw,3.25rem)] font-extrabold uppercase leading-[0.9] text-title"
         >
           {words.join(" ")}
           <span className="block text-accent">{highlight}</span>
@@ -129,37 +130,24 @@ function ProjectDetails({ project }: { project: Project }) {
           ))}
         </dl>
 
-        {(project.live || project.repo) && (
+        {project.live && (
           <div className="mt-8 flex flex-wrap gap-3">
-            {project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${buttonSweep} flex items-center gap-2 bg-button px-5 py-2.5 text-base font-semibold text-white [--sweep:var(--title)] hover:text-(--inverse-bg)`}
-              >
-                <LuExternalLink className="size-3.5" aria-hidden="true" />
-                Live site
-              </a>
-            )}
-            {project.repo && (
-              <a
-                href={project.repo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${buttonSweep} flex items-center gap-2 border border-border px-5 py-2.5 text-base font-semibold text-title [--sweep:var(--accent)] hover:border-accent hover:text-(--inverse-bg)`}
-              >
-                <LuGithub className="size-3.5" aria-hidden="true" />
-                Source code
-              </a>
-            )}
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${buttonSweep} flex items-center gap-2 bg-button hover:cursor-pointer px-5 py-2.5 text-base font-semibold text-white [--sweep:var(--title)] hover:text-(--inverse-bg)`}
+            >
+              <LuExternalLink className="size-3.5" aria-hidden="true" />
+              Live site
+            </a>
           </div>
         )}
       </div>
 
       {/* Pushed down on desktop so the close button never covers the screenshots */}
       <div className="lg:pt-10">
-        <ProjectGallery project={project} />
+        <ProjectGallery key={project.slug} project={project} />
       </div>
     </div>
   );

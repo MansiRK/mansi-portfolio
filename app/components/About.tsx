@@ -26,7 +26,7 @@ export default function About() {
           I’ve worked with 15+ clients across real estate, finance, manufacturing and media, building CMS platforms, admin dashboards and secure REST APIs. I care about speed, clean code and SEO that helps people actually find the work.
         </p>
 
-        <SocialLinks className="mt-8" />
+        <SocialLinks className="mt-8" showEmail={false} />
       </div>
 
       <div className="overflow-hidden border border-border shadow-xl">

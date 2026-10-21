@@ -7,10 +7,13 @@ const SOCIAL_LINKS = [
   { label: "Email", href: `mailto:${PROFILE.email}`, Icon: LuMail },
 ];
 
-export default function SocialLinks({ className = "" }: { className?: string }) {
+/** `showEmail={false}` hides the email icon where the address is already shown as text */
+export default function SocialLinks({ className = "", showEmail = true }: { className?: string; showEmail?: boolean }) {
+  const links = showEmail ? SOCIAL_LINKS : SOCIAL_LINKS.filter((link) => link.label !== "Email");
+
   return (
     <ul className={`flex gap-2 ${className}`}>
-      {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+      {links.map(({ label, href, Icon }) => (
         <li key={label}>
           <a
             href={href}

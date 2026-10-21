@@ -13,8 +13,23 @@ export type Project = {
   stack: string[];
   live?: string;
   repo?: string;
-  /** Optional screenshots under /public, e.g. ["/images/works/raymond-1.png"]. The first is the card cover. */
-  images?: string[];
+  /** Card cover, e.g. "/images/projects/raymond/home.png". Falls back to the first gallery page. */
+  cover?: string;
+  /** Pages shown in the project modal, each with a desktop and (optionally) a mobile screenshot */
+  gallery?: ProjectPage[];
+};
+
+/**
+ * One page of a project. Paths start at /public but leave it out:
+ * public/images/projects/raymond/home.png  ->  "/images/projects/raymond/home.png"
+ */
+export type ProjectPage = {
+  /** Tab label in the modal */
+  title: string;
+  /** Desktop screenshot (a full-page one can be scrolled inside the browser frame) */
+  desktop: string;
+  /** Mobile screenshot, shown in a phone frame */
+  mobile?: string;
 };
 
 export const PROJECTS: Project[] = [
@@ -34,20 +49,23 @@ export const PROJECTS: Project[] = [
     ],
     stack: ["Next.js", "React.js", "Node.js", "Express.js", "MongoDB"],
     live: "https://raymondrealty.in/",
-    cover: "/projects/raymond/home.png",
-gallery: [
-  { src: "/projects/raymond/raymond/home.png", alt: "Raymond Realty homepage" },
-  { src: "/projects/raymond/raymond/about.png", alt: "CMS admin panel" },
-  { src: "/projects/raymond/raymond/proj.png", alt: "Mobile views" },
-  { src: "/projects/raymond/raymond/proj.png", alt: "Mobile views" },
-  { src: "/projects/raymond/raymond/home-mob.png", alt: "Mobile views" },
-  { src: "/projects/raymond/raymond/enq.png", alt: "Mobile views" },
-  { src: "/projects/raymond/raymond/investor.png", alt: "Mobile views" },
-  { src: "/projects/raymond/raymond/proj-broc-mob.png", alt: "Mobile views" },
-  { src: "/projects/raymond/raymond/proj-broc.png", alt: "Mobile views" },
-
-
-],
+    cover: "/images/projects/raymond/home.png",
+    gallery: [
+      {
+        title: "Home",
+        desktop: "/images/projects/raymond/home.png",
+        mobile: "/images/projects/raymond/home-mob.png",
+      },
+      { title: "About", desktop: "/images/projects/raymond/about.png" },
+      { title: "Projects", desktop: "/images/projects/raymond/proj.png" },
+      {
+        title: "Project details",
+        desktop: "/images/projects/raymond/proj-broc.png",
+        mobile: "/images/projects/raymond/proj-broc-mob.png",
+      },
+      { title: "Investors", desktop: "/images/projects/raymond/investor.png" },
+      { title: "Enquiry", desktop: "/images/projects/raymond/enq.png" },
+    ],
   },
   {
     slug: "hindustan-pencils",

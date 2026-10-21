@@ -1,26 +1,194 @@
 @import "tailwindcss";
 
+/* `dark:` utilities follow the data-theme attribute set on <html> */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --light-bg: rgb(241, 241, 241);
+  --secondary-light-bg: #F1EBFA;
+  --ternary-light-bg: #311042;
+  --light-text: #6E5A80;
+  --secondary-light-text: #311042;
+  --ternary-light-text: #D946EF;
+  --light-title-text: #311042;
+  --light-process-text: #CDB9DD;
+  --light-gray-text: #F8F6FC;
+  --light-step-title-text: #EE8CFA;
+  --light-button-bg: #C026D3;
+  --light-border-bg: #E4D9F0;
+
+  --dark-bg: black;
+  --secondary-dark-bg: #120F1C;
+  --ternary-dark-bg: #161020;
+  --dark-text: #A69CB9;
+  --secondary-dark-text: #EDE8F6;
+  --ternary-dark-text: #A855F7;
+  --dark-title-text: #F4EFFC;
+  --dark-button-bg: #DB2777;
+  --dark-border-bg: #2A2039;
+
+  /* Fonts are loaded with next/font in layout.tsx */
+  --primary-font: var(--font-outfit), "Outfit", sans-serif;
+  --secondary-font: var(--font-syne), "Syne", sans-serif;
+}
+
+/* Semantic tokens: components use these, so they switch with the theme */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: var(--light-gray-text);
+  --surface: var(--secondary-light-bg);
+  --text: var(--light-text);
+  --title: var(--light-title-text);
+  --accent: var(--ternary-light-text);
+  --hero-word: var(--light-title-text);
+  --button: var(--light-button-bg);
+  --border: var(--light-border-bg);
+  --menu-bg: var(--ternary-light-bg);
+  --menu-text: #ffffff;
+  --rule: var(--light-text);
+  --deco: var(--ternary-light-bg);
+  --pill-bg: #ffffff;
+  --card-from: #4A1663;
+  --card-to: var(--ternary-light-text);
+  --code-bg: #1E0F2B;
+  --code-head: #160A20;
+  --info-bg: var(--ternary-light-bg);
+  --info-label: var(--light-process-text);
+  --info-value: #ffffff;
+  --window-bg: #ffffff;
+  --window-line: var(--light-process-text);
+  --section-alt: #EFE6FA;
+  --card-bg: #ffffff;
+  --icon-bg: #FAE8FF;
+  --icon-fg: var(--ternary-light-text);
+  --chip-bg: #EEE6F8;
+  --chip-text: var(--light-title-text);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: var(--secondary-dark-bg);
+  --surface: #211A2E;
+  --text: var(--dark-text);
+  --title: var(--dark-title-text);
+  --accent: var(--ternary-dark-text);
+  --hero-word: var(--ternary-dark-text);
+  --button: var(--dark-button-bg);
+  --border: var(--dark-border-bg);
+  --menu-bg: var(--ternary-dark-text);
+  --menu-text: var(--secondary-dark-bg);
+  --rule: var(--dark-button-bg);
+  --deco: var(--ternary-dark-text);
+  --pill-bg: var(--ternary-dark-bg);
+  --card-from: #7C3AED;
+  --card-to: #EC4899;
+  --code-bg: var(--ternary-dark-bg);
+  --code-head: #1C1528;
+  --info-bg: var(--ternary-dark-bg);
+  --info-label: var(--dark-text);
+  --info-value: var(--dark-title-text);
+  --window-bg: var(--secondary-dark-bg);
+  --window-line: var(--dark-border-bg);
+  --section-alt: #1A1526;
+  --card-bg: var(--ternary-dark-bg);
+  --icon-bg: #3A1530;
+  --icon-fg: var(--dark-button-bg);
+  --chip-bg: #221B2E;
+  --chip-text: var(--secondary-dark-text);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-title: var(--title);
+  --color-accent: var(--accent);
+  --color-hero-word: var(--hero-word);
+  --color-button: var(--button);
+  --color-border: var(--border);
+  --color-menu-bg: var(--menu-bg);
+  --color-menu-text: var(--menu-text);
+  --color-rule: var(--rule);
+  --color-deco: var(--deco);
+  --color-pill-bg: var(--pill-bg);
+  --color-card-from: var(--card-from);
+  --color-card-to: var(--card-to);
+  --color-code-bg: var(--code-bg);
+  --color-code-head: var(--code-head);
+  --color-info-bg: var(--info-bg);
+  --color-info-label: var(--info-label);
+  --color-info-value: var(--info-value);
+  --color-window-bg: var(--window-bg);
+  --color-window-line: var(--window-line);
+  --color-section-alt: var(--section-alt);
+  --color-card-bg: var(--card-bg);
+  --color-icon-bg: var(--icon-bg);
+  --color-icon-fg: var(--icon-fg);
+  --color-chip-bg: var(--chip-bg);
+  --color-chip-text: var(--chip-text);
+  --font-sans: var(--primary-font);
+  --font-display: var(--secondary-font);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Full-width wrapper with a ~5% gutter on each side (matches the design) */
+@utility site-container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: max(1.25rem, 5vw);
+}
+
+/* "What I do" background: soft accent glows in the top-right and bottom-left corners */
+@utility services-bg {
+  background-color: var(--section-alt);
+  background-image:
+    radial-gradient(ellipse 50% 60% at 100% 0%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 0% 100%, color-mix(in oklab, var(--button) 14%, transparent), transparent 70%);
+}
+
+/* Dark band in both themes (My process, project modal): re-points the shared tokens.
+   Components inside (SectionHeading etc.) pick these up automatically. */
+.inverse-theme {
+  --inverse-bg: var(--ternary-light-bg);
+  --inverse-icon: var(--ternary-light-text);
+  --inverse-deco-big: #DA7FE8;
+  --inverse-deco-small: var(--ternary-light-text);
+  --title: var(--light-gray-text);
+  --accent: var(--light-step-title-text);
+  --text: var(--light-process-text);
+  --rule: var(--ternary-light-text);
+  --border: color-mix(in oklab, white 18%, transparent);
+}
+
+[data-theme="dark"] .inverse-theme {
+  --inverse-bg: #150F1F;
+  --inverse-icon: var(--dark-button-bg);
+  --inverse-deco-big: #9B4DE0;
+  --inverse-deco-small: #EC4899;
+  --title: var(--dark-title-text);
+  --accent: var(--ternary-dark-text);
+  --text: var(--dark-text);
+  --rule: var(--dark-button-bg);
+  --border: var(--dark-border-bg);
+}
+
+/* Kept inside the base layer so Tailwind's padding/margin utilities can override it */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Stop the page scrolling behind an open modal (project details) */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  body {
+    font-family: var(--primary-font);
+    background: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 }

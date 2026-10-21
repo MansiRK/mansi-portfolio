@@ -72,7 +72,7 @@ export default function SideBar({ open, onClose }: SideBarProps) {
           type="button"
           onClick={onClose}
           aria-label="Close menu"
-          className="absolute right-5 top-5 grid size-8 place-items-center bg-pill-bg text-title shadow-md transition-transform hover:rotate-90 dark:text-accent"
+          className="absolute right-5 hover:cursor-pointer top-5 grid size-8 place-items-center bg-pill-bg text-title shadow-md transition-transform hover:rotate-90 dark:text-accent"
         >
           <LuX className="size-3.5" aria-hidden="true" />
         </button>
@@ -109,7 +109,7 @@ export default function SideBar({ open, onClose }: SideBarProps) {
         </div>
 
         <div className="mt-2">
-          <p className="max-w-60 text-sm leading-relaxed text-text">
+          <p className="max-w-60 text-base leading-relaxed text-text">
             A quick map of who I am, what I build and how to reach me.
           </p>
           <SocialLinks className="mt-4" />

@@ -2,8 +2,7 @@
 export const PROFILE = {
   name: "Mansi Kamble",
   email: "mansikamble1110@gmail.com",
-  phone: "+91 95790 68536",
-  location: "Virar, Maharashtra",
+  location: "Mumbai, Maharashtra",
   github: "https://github.com/MansiRK",
   linkedin: "https://www.linkedin.com/in/mansi-kamble",
 };

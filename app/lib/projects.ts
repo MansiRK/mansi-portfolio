@@ -1,88 +1,144 @@
 export type ProjectFilter = "cms" | "dashboards" | "websites";
 
+// lib/projects.ts
 export type Project = {
+  slug: string;
   title: string;
-  /** Shown above the title in the modal and first in the card subtitle */
-  category: string;
-  filter: ProjectFilter;
+  category: "client" | "personal";
+  kind: "Full-stack" | "Frontend" | "Backend";
   industry: string;
-  tags: string[];
+  role: string;
   summary: string;
   highlights: string[];
-  role: string;
-  stack: string;
-  /** Screenshot paths under /public, e.g. "/images/works/raymond-1.png". The first one is the cover. */
-  images: string[];
-  /** Gradient frame behind the screenshots */
-  gradient: string;
-  liveUrl?: string;
-  sourceUrl?: string;
+  stack: string[];
+  live?: string;
+  repo?: string;
+  /** Optional screenshots under /public, e.g. ["/images/works/raymond-1.png"]. The first is the card cover. */
+  images?: string[];
 };
 
-export const FILTERS: { value: ProjectFilter | "all"; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "cms", label: "CMS platforms" },
-  { value: "dashboards", label: "Dashboards" },
-  { value: "websites", label: "Websites" },
-];
-
-// TODO: add screenshots to `images`, live/source URLs, and fill in the details marked below
 export const PROJECTS: Project[] = [
   {
+    slug: "raymond-realty",
     title: "Raymond Realty",
-    category: "CMS platform",
-    filter: "cms",
+    category: "client",
+    kind: "Full-stack",
     industry: "Real estate",
-    tags: ["Next.js", "MERN", "JWT"],
+    role: "Full-stack developer, ongoing maintenance",
     summary:
-      "Frontend, backend and admin panel features for a large-scale real estate platform built with Next.js and the MERN stack.",
+      "Built new features across the public site, admin panel and backend for a large real estate platform, and improved its technical SEO.",
     highlights: [
-      "CMS modules for dynamic content management",
-      "Technical SEO with meta tags, XML sitemap, robots.txt, GA4 and GTM",
-      "Salesforce integration, plus AMC support and production fixes",
+      "Shipped features end to end: Next.js frontend, React admin panel, Express API",
+      "Technical SEO: meta tags, XML sitemap, robots.txt, GA4 and GTM",
+      "Ongoing maintenance: production fixes and feature enhancements",
     ],
-    role: "Full-stack developer",
-    stack: "Next.js, MERN, JWT, Zustand",
-    images: [],
-    gradient: "from-[#7C3AED] to-[#EC4899]",
+    stack: ["Next.js", "React.js", "Node.js", "Express.js", "MongoDB"],
+    live: "https://raymondrealty.in/",
+    cover: "/projects/raymond/home.png",
+gallery: [
+  { src: "/projects/raymond/raymond/home.png", alt: "Raymond Realty homepage" },
+  { src: "/projects/raymond/raymond/about.png", alt: "CMS admin panel" },
+  { src: "/projects/raymond/raymond/proj.png", alt: "Mobile views" },
+  { src: "/projects/raymond/raymond/proj.png", alt: "Mobile views" },
+  { src: "/projects/raymond/raymond/home-mob.png", alt: "Mobile views" },
+  { src: "/projects/raymond/raymond/enq.png", alt: "Mobile views" },
+  { src: "/projects/raymond/raymond/investor.png", alt: "Mobile views" },
+  { src: "/projects/raymond/raymond/proj-broc-mob.png", alt: "Mobile views" },
+  { src: "/projects/raymond/raymond/proj-broc.png", alt: "Mobile views" },
+
+
+],
   },
   {
+    slug: "hindustan-pencils",
     title: "Hindustan Pencils",
-    category: "CMS platform",
-    filter: "cms",
+    category: "client",
+    kind: "Full-stack",
     industry: "Manufacturing",
-    tags: ["Next.js", "MERN", "MongoDB"],
-    summary: "CMS platform for a manufacturing brand.", // TODO: expand
-    highlights: [], // TODO
-    role: "Full-stack developer", // TODO: confirm
-    stack: "Next.js, MERN, MongoDB",
-    images: [],
-    gradient: "from-[#3B0F4F] to-[#D946EF]",
+    role: "Full-stack developer",
+    summary:
+      "Built the Careers, Channel Partner and Export modules, each with its own admin panel, on a MERN-based CMS.",
+    highlights: [
+      "3 separate admin panels for jobs, partner enquiries and export requests",
+      "Dynamic job filters and application forms",
+      "Reusable backend APIs shared across modules",
+    ],
+    stack: ["Next.js", "React.js", "Node.js", "Express.js", "MongoDB"],
+    live: "https://hindustanpencils.com/",
   },
   {
+    slug: "piper-serica",
     title: "Piper Serica",
-    category: "Dashboard",
-    filter: "dashboards",
+    category: "client",
+    kind: "Full-stack",
     industry: "Finance",
-    tags: ["React.js", "Node.js", "MongoDB"],
-    summary: "Dashboard for a finance client.", // TODO: expand
-    highlights: [], // TODO
-    role: "Full-stack developer", // TODO: confirm
-    stack: "React.js, Node.js, MongoDB",
-    images: [],
-    gradient: "from-[#A855F7] to-[#6366F1]",
+    role: "Full-stack developer",
+    summary:
+      "Built the frontend, backend and admin panel for an investment firm, with optimised APIs and hardened security.",
+    highlights: [
+      "Around 30% faster through optimised API integration",
+      "JWT authentication",
+      "CORS, Helmet and CSP security headers",
+    ],
+    stack: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "Redis"],
+    live: "https://piperserica.com/",
   },
   {
+    slug: "natroyal-group",
     title: "Natroyal Group",
-    category: "Business website",
-    filter: "websites",
+    category: "client",
+    kind: "Full-stack",
     industry: "Manufacturing",
-    tags: ["React.js", "MERN", "AWS S3"],
-    summary: "Business website for a manufacturing group.", // TODO: expand
-    highlights: [], // TODO
-    role: "Full-stack developer", // TODO: confirm
-    stack: "React.js, MERN, AWS S3",
-    images: [],
-    gradient: "from-[#5B21B6] to-[#C084FC]",
+    role: "Full-stack developer",
+    summary:
+      "Built the business website, backend and admin panel for a group with 5 divisions.",
+    highlights: [
+      "One responsive site presenting all 5 divisions",
+      "Admin panel for managing content without code",
+      "Media stored on AWS S3",
+    ],
+    stack: ["React.js", "Node.js", "Express.js", "MongoDB", "AWS S3"],
+    live: "https://www.natroyalgroup.com/",
+  },
+  {
+    slug: "my-manas",
+    title: "My Manas Foundation",
+    category: "client",
+    kind: "Frontend",
+    industry: "Non-profit",
+    role: "Frontend developer",
+    summary: "Built the responsive frontend for the My Manas Foundation website.",
+    highlights: ["Responsive React.js frontend", "Reusable component-based pages"],
+    stack: ["React.js", "CSS"],
+    live: "https://mymanas.org/",
+  },
+  {
+    slug: "shoprise",
+    title: "ShopRise E-commerce",
+    category: "personal",
+    kind: "Full-stack",
+    industry: "E-commerce",
+    role: "Personal project",
+    summary:
+      "A full-stack e-commerce store with a customer-facing shop, an admin panel and a MySQL database.",
+    highlights: [
+      "Product catalogue and storefront",
+      "Admin panel for products and orders",
+      "Relational data modelling in MySQL",
+    ],
+    stack: ["React.js", "Node.js", "Express.js", "MySQL"],
+    repo: "https://github.com/MansiRK/ShopRise-Ecommerce",
+  },
+  {
+    slug: "social-media-api",
+    title: "Social Media API",
+    category: "personal",
+    kind: "Backend",
+    industry: "Social",
+    role: "Personal project",
+    summary: "A REST API powering the core of a social media app.",
+    highlights: ["RESTful endpoints for users and posts", "MongoDB data models with Mongoose"],
+    stack: ["Node.js", "Express.js", "MongoDB"],
+    repo: "https://github.com/MansiRK/Social-media-app-Backend",
   },
 ];

@@ -191,6 +191,12 @@
     overflow: hidden;
   }
 
+  /* Nothing may widen the page: on phones that makes the browser zoom out and centred content looks shifted left */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     font-family: var(--primary-font);
     background: var(--bg);
@@ -254,4 +260,64 @@ html.motion [data-hero] {
   to {
     visibility: visible;
   }
+}
+
+/* Loading screen: no scrolling until it has lifted (see Loader) */
+html:has(#loader) {
+  overflow: hidden;
+}
+
+/* Custom cursor (see CustomCursor): hide the native one, but keep the text caret in form fields */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none;
+}
+
+html.has-custom-cursor :is(input, textarea) {
+  cursor: text;
+}
+
+/* The project modal sits in the browser's top layer, above the custom cursor, so use the native one there */
+html.has-custom-cursor:has(dialog[open]) * {
+  cursor: auto;
+}
+
+html:has(dialog[open]) .custom-cursor {
+  display: none;
+}
+
+.cursor-ring {
+  transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease, scale 0.15s ease;
+}
+
+.cursor-ring.is-hovering {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: color-mix(in oklab, var(--accent) 15%, transparent);
+}
+
+.cursor-ring.is-pressed {
+  scale: 0.8;
+}
+
+/* Custom scrollbar: slim accent thumb on the page background (follows the theme) */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg);
+}
+
+/* Safari still uses the older pseudo-elements */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  border-radius: 999px;
 }

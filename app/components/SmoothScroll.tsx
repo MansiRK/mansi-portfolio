@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { useEffect } from "react";
 import { setLenis } from "../lib/lenis";
+import { loaderDone } from "../lib/loader";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +20,10 @@ export default function SmoothScroll() {
       anchors: { offset: -24 }, // smooth-scroll in-page links (sidebar, "Start a project")
     });
     setLenis(lenis);
+
+    // No scrolling until the loading screen has lifted
+    lenis.stop();
+    loaderDone.then(() => lenis.start());
 
     lenis.on("scroll", ScrollTrigger.update);
     const tick = (time: number) => lenis.raf(time * 1000);

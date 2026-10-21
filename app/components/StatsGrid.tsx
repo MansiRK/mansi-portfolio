@@ -39,7 +39,7 @@ export default function StatsGrid({ stats }: { stats: Stat[] }) {
     <dl ref={gridRef} data-reveal-group className="grid grid-cols-2 gap-x-5 sm:gap-x-8">
       {stats.map((stat) => (
         <div key={stat.label} className="flex min-w-0 flex-col-reverse border-t border-border pb-8 pt-6">
-          <dt className="mt-2 text-xs font-semibold text-title sm:text-sm">{stat.label}</dt>
+          <dt className="mt-2 text-sm font-medium text-title sm:text-base uppercase">{stat.label}</dt>
           <dd className="font-display text-[clamp(1.75rem,8vw,3.25rem)] font-extrabold leading-[1.1] text-accent lg:text-[clamp(2.25rem,4vw,4.5rem)]">
             <span aria-hidden="true" className="whitespace-nowrap">
               <OdometerValue value={stat.value} decimals={stat.decimals ?? 0} start={inView} run={run} />

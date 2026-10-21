@@ -18,7 +18,7 @@ export default function Contact() {
       <section
         id="contact"
         aria-labelledby="contact-title"
-        className="site-container grid scroll-mt-6 gap-12 pb-16 pt-20 lg:grid-cols-[minmax(0,1fr)_26rem] lg:gap-12 lg:pt-28 xl:grid-cols-[minmax(0,1fr)_30rem] xl:gap-16"
+        className="site-container grid scroll-mt-6 gap-8 pb-16 pt-20 lg:grid-cols-[minmax(0,1fr)_26rem] lg:gap-12 lg:pt-28 xl:grid-cols-[minmax(0,1fr)_30rem] xl:gap-16"
       >
         <div data-reveal-group className="flex flex-col">
           <SectionTitle
@@ -33,7 +33,7 @@ export default function Contact() {
             // Slightly smaller on desktop so the title leaves room for the form
             className="lg:text-[clamp(2rem,0.25rem+4vw,5rem)]"
           />
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-text sm:text-base">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-text">
             Have a project in mind? Tell me what you&rsquo;re building and I&rsquo;ll reply within one working day.
           </p>
 
@@ -50,12 +50,12 @@ export default function Contact() {
                       href={href}
                       target={href.startsWith("http") ? "_blank" : undefined}
                       rel="noopener noreferrer"
-                      className="text-sm font-semibold text-title transition-colors [overflow-wrap:anywhere] hover:text-accent"
+                      className="text-base font-semibold text-title transition-colors [overflow-wrap:anywhere] hover:text-accent"
                     >
                       {value}
                     </a>
                   ) : (
-                    <p className="text-sm font-semibold text-title">{value}</p>
+                    <p className="text-base font-semibold text-title">{value}</p>
                   )}
                 </div>
               </li>

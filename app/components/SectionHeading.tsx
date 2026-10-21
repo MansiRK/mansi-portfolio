@@ -12,7 +12,7 @@ export function SectionTitle({ id, title, highlight, className = "" }: SectionTi
     <div>
       <h2
         id={id}
-        className={`font-display text-[clamp(1.75rem,0.25rem+5.75vw,6rem)] font-extrabold uppercase leading-[0.9] text-title ${className}`}
+        className={`font-display text-[clamp(1.25rem,0.25rem+5.75vw,6rem)] font-extrabold uppercase leading-[0.9] text-title ${className}`}
       >
         {title}
         <span className="block text-accent">{highlight}</span>
@@ -36,7 +36,7 @@ export default function SectionHeading({ id, title, highlight, description, deco
 
       <div className="max-w-sm lg:pb-6">
         {decoration && <div className="mb-8 hidden lg:block">{decoration}</div>}
-        <p className="text-sm leading-relaxed text-text sm:text-base">{description}</p>
+        <p className="text-base leading-relaxed text-text">{description}</p>
       </div>
     </div>
   );

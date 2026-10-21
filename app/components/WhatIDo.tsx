@@ -47,14 +47,14 @@ export default function WhatIDo() {
               className="flex flex-col border border-border bg-card-bg p-6 transition-colors hover:border-title dark:hover:border-accent"
             >
               <IconBadge name={service.icon} />
-              <h3 className="mt-6 text-lg font-semibold leading-snug text-title">{service.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-text">{service.description}</p>
+              <h3 className="mt-6 text-lg font-semibold leading-snug text-title uppercase">{service.title}</h3>
+              <p className="mt-3 text-base leading-relaxed text-text">{service.description}</p>
 
               <ul className="mt-auto flex flex-wrap gap-2 pt-8">
                 {service.tags.map((tag) => (
                   <li
                     key={tag}
-                    className=" bg-chip-bg px-3 py-1 text-[11px] font-semibold text-title dark:text-accent"
+                    className="bg-chip-bg px-3 py-1 text-sm font-semibold text-title dark:text-accent"
                   >
                     {tag}
                   </li>

@@ -1,23 +1,24 @@
 import Image from "next/image";
 import { LuDownload } from "react-icons/lu";
+import { buttonSweep } from "../lib/ui";
 import profileBanner from "@/public/images/profile_banner1.png";
 
-const heroTextSize = "text-[clamp(2rem,8.7vw,11rem)]";
+const heroTextSize = "text-[clamp(2rem,13vw,15rem)]";
 
 export default function Banner() {
   return (
     <section id="home" className="relative flex flex-1 flex-col justify-between overflow-hidden pb-10 xl:min-h-[640px] xl:justify-end">
       <h1 className="sr-only">Mansi Kamble, MERN Stack Developer</h1>
 
-      {/* On xl the word sits a little above the vertical centre of the banner, behind the photo */}
+      {/* On xl the word sits high in the banner so the photo only overlaps it a little (just the head) */}
       <p
         aria-hidden="true"
         data-hero="word"
-        className={`overflow-hidden pt-4 xl:absolute xl:inset-x-0 xl:top-[42%] xl:-translate-y-1/2 xl:pt-0 text-center font-display font-extrabold uppercase leading-none tracking-tight text-hero-word ${heroTextSize}`}
+        className={`overflow-hidden pt-4 xl:absolute xl:inset-x-0 xl:top-[22%] xl:-translate-y-1/2 xl:pt-0 text-center font-display font-extrabold uppercase leading-none tracking-tight text-hero-word ${heroTextSize}`}
       >
         {/* Each letter is its own span so the intro can raise them one by one */}
-        <span data-hero-chars className="inline-block">
-          {"Developer".split("").map((letter, i) => (
+        <span data-hero-chars className="-mr-[0.2em] inline-block tracking-[0.2em]">
+          {"Mansi".split("").map((letter, i) => (
             <span key={i} className="inline-block">
               {letter}
             </span>
@@ -45,35 +46,38 @@ export default function Banner() {
       <div className="site-container relative z-20 mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
         <div className="max-w-sm">
              <span data-hero="text" className="flex items-center gap-2 whitespace-nowrap py-1.5 pb-3 text-[10px] font-semibold text-title sm:text-xs">
-          <span className="size-2 rounded-full bg-emerald-400 shadow-[0_0_0_3px] shadow-emerald-400/25" />
-          Available for work
+          {/* Pulsing "online" dot: a ring ripples out from the solid dot (static with reduced motion) */}
+          <span className="relative flex size-2">
+            <span className="absolute inline-flex size-full rounded-full bg-emerald-400 opacity-75 motion-safe:animate-ping" />
+            <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+          </span>
+          Open to new roles
         </span>
           <p data-hero="text" className="text-base leading-snug text-title sm:text-lg">
-            I build fast, SEO-friendly web apps, CMS platforms and dashboards
-            that clients run in production.
+            Hi, I’m <span className="font-display font-extrabold uppercase text-accent">Mansi Kamble</span>. I build fast, scalable web apps with React, Next.js and Node, from the database to the last pixel.
           </p>
 
           <div data-hero="text" className="mt-6 flex flex-wrap gap-3">
             <a
-              href="#contact"
-              className="bg-button px-5 py-2.5 text-xs font-semibold text-white transition-opacity hover:opacity-90"
+              href="#works"
+              className={`${buttonSweep} bg-button px-5 py-2.5 text-base font-semibold text-white [--sweep:var(--title)] dark:hover:text-bg`}
             >
-              Start a project
+              View My Work
             </a>
             {/* TODO: add the CV file to /public */}
             <a
               href="/Mansi-Kamble-CV.pdf"
               download
-              className="flex items-center gap-2 border border-title px-5 py-2.5 text-xs font-semibold text-title transition-colors hover:bg-title hover:text-bg dark:border-accent dark:text-accent dark:hover:bg-accent dark:hover:text-bg"
+              className={`${buttonSweep} flex items-center gap-2 border border-title px-5 py-2.5 text-base font-semibold text-title [--sweep:var(--title)] hover:text-bg dark:border-accent dark:text-accent dark:[--sweep:var(--accent)] dark:hover:text-bg`}
             >
               <LuDownload className="size-3.5" aria-hidden="true" />
-              Download CV
+              Download Resume
             </a>
           </div>
 
-          <p data-hero="text" className="mt-2 flex items-center gap-3 text-xs font-semibold text-title dark:text-button">
+          <p data-hero="text" className="mt-3 flex items-center gap-3 text-xs font-semibold text-title dark:text-button">
             <span className="h-px w-8 bg-button" />
-            Mansi Kamble
+            2.5+ years building for the web
           </p>
         </div>
 

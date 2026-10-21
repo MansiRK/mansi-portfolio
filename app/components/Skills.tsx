@@ -5,7 +5,7 @@ const SKILL_GROUPS: { icon: IconName; title: string; skills: string[] }[] = [
   {
     icon: "code",
     title: "Frontend",
-    skills: ["React.js", "Next.js", "JavaScript (ES6+)", "HTML", "CSS", "Tailwind CSS", "Bootstrap", "Styled Components", "GSAP", "Zustand", "Axios"],
+    skills: ["React.js", "Next.js", "JavaScript (ES6+)", "TypeScript", "HTML", "CSS", "Tailwind CSS", "Bootstrap", "Styled Components", "GSAP", "Zustand", "Axios"],
   },
   {
     icon: "server",
@@ -43,7 +43,7 @@ export default function Skills() {
                 <h3 className="font-display text-lg font-extrabold uppercase leading-none text-title xl:text-base 2xl:text-lg">
                   {group.title}
                 </h3>
-                <p className="mt-1 text-[11px] text-accent">{group.skills.length} skills</p>
+                <p className="mt-1 text-xs text-accent">{group.skills.length} skills</p>
               </div>
             </div>
 
@@ -51,7 +51,7 @@ export default function Skills() {
               {group.skills.map((skill) => (
                 <li
                   key={skill}
-                  className="flex items-center gap-2 bg-chip-bg px-3 py-1.5 text-xs font-medium text-chip-text"
+                  className="flex items-center gap-2 bg-chip-bg px-3 py-1.5 text-sm font-medium text-chip-text"
                 >
                   <span className="size-1.5 rounded-full bg-title dark:bg-accent" aria-hidden="true" />
                   {skill}

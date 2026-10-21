@@ -30,13 +30,12 @@ export default function Process() {
     <section
       id="process"
       aria-labelledby="process-title"
-      className="inverse-theme relative isolate scroll-mt-6 overflow-hidden bg-(--inverse-bg)"
+      className="relative isolate scroll-mt-6 overflow-hidden bg-section-alt dark:bg-bg"
     >
       {/* Background artwork sits below the content (z-0 vs z-10) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        <span data-parallax="0.25" className="absolute right-0 top-0 size-16 bg-(--inverse-deco-big) sm:size-24 lg:size-28" />
-        <span data-parallax="0.6" className="absolute right-16 top-16 size-8 bg-(--inverse-deco-small) sm:right-24 sm:top-24 sm:size-12 lg:right-28 lg:top-28 lg:size-14" />
-        <Rings />
+        <Orbits />
+        <span className="absolute bottom-0 right-0 size-14 bg-deco sm:size-20 lg:size-24" />
       </div>
 
       <div className="site-container relative z-10 py-20 lg:py-28">
@@ -64,15 +63,15 @@ export default function Process() {
             <li key={title} className="group relative grid grid-cols-[auto_1fr] gap-x-5 lg:block">
               <span
                 data-timeline-dot
-                className="relative grid size-10 place-items-center border border-border bg-(--inverse-bg) text-(--inverse-icon) transition-colors duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-(--inverse-bg)"
+                className="relative grid size-10 place-items-center border border-border bg-section-alt text-icon-fg transition-colors duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-white dark:bg-bg"
               >
                 <Icon className="size-4" aria-hidden="true" />
               </span>
 
               <div data-timeline-item className="lg:mt-8">
                 <p className="text-xs font-semibold text-accent">Step {index + 1}</p>
-                <h3 className="mt-1 text-xl font-semibold text-title sm:text-2xl">{title}</h3>
-                <p className="mt-3 max-w-xs text-sm leading-relaxed text-text">{description}</p>
+                <h3 className="mt-1 text-xl font-semibold text-title sm:text-2xl uppercase">{title}</h3>
+                <p className="mt-3 max-w-xs text-base leading-relaxed text-text">{description}</p>
               </div>
             </li>
           ))}
@@ -82,17 +81,19 @@ export default function Process() {
   );
 }
 
-/* Concentric rings in the bottom-left corner with an accent arc and a dot */
-function Rings() {
+/* Rings around a glowing dot in the bottom-left corner */
+function Orbits() {
   return (
-    <svg viewBox="0 0 360 360" data-parallax="0.15" className="absolute bottom-0 left-0 w-64 sm:w-80 lg:w-96">
-      <g fill="none" className="stroke-title/10" strokeWidth="1">
-        {[70, 140, 210, 280, 350].map((r) => (
-          <circle key={r} cx="0" cy="360" r={r} />
-        ))}
+    <svg viewBox="0 0 320 320" data-parallax="0.15" className="absolute -bottom-16 -left-20 w-72 sm:w-80 lg:w-96">
+      <g fill="none" strokeWidth="1">
+        <circle cx="140" cy="200" r="70" className="stroke-title/25" strokeDasharray="3 5" />
+        <circle cx="140" cy="200" r="110" className="stroke-title/15" />
+        <circle cx="140" cy="200" r="150" className="stroke-title/10" strokeDasharray="3 5" />
       </g>
-      <path d="M0 290a70 70 0 0 1 70 70" fill="none" className="stroke-(--inverse-deco-small)" strokeWidth="5" />
-      <circle cx="148" cy="212" r="6" className="fill-accent" />
+      <circle cx="140" cy="200" r="44" className="fill-accent/20 dark:fill-button/20" />
+      <circle cx="140" cy="200" r="26" className="fill-accent dark:fill-button" />
+      <circle cx="232" cy="122" r="5" className="fill-accent dark:fill-button" />
+      <circle cx="58" cy="96" r="3.5" className="fill-accent dark:fill-button" />
     </svg>
   );
 }

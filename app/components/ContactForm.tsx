@@ -3,12 +3,19 @@
 import { useState } from "react";
 import { LuChevronDown, LuSend } from "react-icons/lu";
 import { PROFILE } from "../lib/profile";
+import { buttonSweep } from "../lib/ui";
 
-const PROJECT_TYPES = ["Website", "Web app", "AI integration", "Other"];
+const PROJECT_TYPES = [
+  "Website",
+  "Web app",
+  "CMS / Admin dashboard",
+  "SEO & performance",
+  "Job opportunity",
+];
 const BUDGETS = ["Under ₹50,000", "₹50,000 to ₹1,00,000", "₹1,00,000 to ₹3,00,000", "Above ₹3,00,000", "Not sure yet"];
 
 const fieldClass =
-  "w-full border border-border bg-field-bg px-3.5 py-2.5 text-sm text-title placeholder:text-text/70 transition-colors focus:border-accent focus:outline-none";
+  "w-full border border-border bg-field-bg px-3.5 py-2.5 text-base text-title placeholder:text-text/70 transition-colors focus:border-accent focus:outline-none";
 const labelClass = "mb-1.5 block text-xs font-semibold text-title";
 
 /**
@@ -17,6 +24,9 @@ const labelClass = "mb-1.5 block text-xs font-semibold text-title";
  */
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [projectType, setProjectType] = useState(PROJECT_TYPES[0]);
+const isJob = projectType === "Job opportunity";
+
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,7 +35,9 @@ export default function ContactForm() {
     const body = [
       `Name: ${data.get("name")}`,
       `Email: ${data.get("email")}`,
-      `Project type: ${data.get("projectType")}`,
+      `Type: ${data.get("projectType")}`,
+  ...(isJob ? [] : [`Budget: ${data.get("budget")}`]),
+  "",
       `Budget: ${data.get("budget")}`,
       "",
       `${data.get("message")}`,
@@ -76,7 +88,14 @@ export default function ContactForm() {
         <div className="flex flex-wrap gap-2">
           {PROJECT_TYPES.map((type, index) => (
             <label key={type} className="cursor-pointer">
-              <input type="radio" name="projectType" value={type} defaultChecked={index === 0} className="peer sr-only" />
+<input
+  type="radio"
+  name="projectType"
+  value={type}
+  checked={projectType === type}
+  onChange={() => setProjectType(type)}
+  className="peer sr-only"
+/>
               <span className="block border border-border px-3.5 py-1.5 text-xs font-semibold text-title transition-colors hover:border-accent peer-checked:border-title peer-checked:bg-title peer-checked:text-bg peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent dark:peer-checked:border-accent dark:peer-checked:bg-accent dark:peer-checked:text-white">
                 {type}
               </span>
@@ -85,6 +104,7 @@ export default function ContactForm() {
         </div>
       </fieldset>
 
+{!isJob && (
       <div className="mt-5">
         <label htmlFor="contact-budget" className={labelClass}>
           Budget
@@ -98,6 +118,7 @@ export default function ContactForm() {
           <LuChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-title" aria-hidden="true" />
         </div>
       </div>
+)}
 
       <div className="mt-5">
         <label htmlFor="contact-message" className={labelClass}>
@@ -115,7 +136,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="mt-6 flex w-full items-center justify-center gap-2 bg-button px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        className={`${buttonSweep} mt-6 flex w-full items-center justify-center gap-2 bg-button px-5 py-3 text-base font-semibold text-white [--sweep:var(--title)] dark:hover:text-bg`}
       >
         <LuSend className="size-4" aria-hidden="true" />
         Send message

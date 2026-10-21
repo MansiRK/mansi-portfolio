@@ -12,7 +12,7 @@ const EXPERIENCE: TimelineItem[] = [
   {
     badge: "Apr 2024 to Oct 2026",
     title: "MERN Developer",
-    place: "Pine Online Website Solutions Pvt Ltd, Mumbai",
+    place: "Five Online Website Solutions Pvt Ltd, Mumbai",
     description:
       "Built and maintained production apps for finance, real estate and media clients: 100+ REST API endpoints with JWT and RBAC, admin dashboards for 500+ records, and 30 to 40% faster page loads. Partnered with 15+ clients and mentored junior developers.",
   },
@@ -105,7 +105,7 @@ function Timeline({ icon, title, items }: { icon: IconName; title: string; items
               </span>
               <h4 className="mt-4 text-base font-semibold text-title sm:text-lg">{item.title}</h4>
               <p className="mt-1 text-xs text-text">{item.place}</p>
-              <p className="mt-3 text-sm leading-relaxed text-text">{item.description}</p>
+              <p className="mt-3 text-base leading-relaxed text-text">{item.description}</p>
             </article>
           </li>
         ))}

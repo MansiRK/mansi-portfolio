@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { LuArrowLeft, LuArrowRight, LuExternalLink, LuGithub, LuX } from "react-icons/lu";
 import { getLenis } from "../lib/lenis";
 import type { Project } from "../lib/projects";
-import ProjectShot from "./ProjectShot";
+import { buttonSweep } from "../lib/ui";
+import ProjectGallery from "./ProjectGallery";
 
 type ProjectModalProps = {
   projects: Project[];
@@ -62,9 +63,9 @@ export default function ProjectModal({ projects, index, onNavigate, onClose }: P
           </button>
 
           {/* key resets the selected screenshot when switching projects */}
-          <ProjectDetails key={project.title} project={project} />
+          <ProjectDetails key={project.slug} project={project} />
 
-          <div className="mt-10 flex items-center justify-between border-t border-border pt-6 text-sm font-semibold text-title">
+          <div className="mt-10 flex items-center justify-between border-t border-border pt-6 text-base font-semibold text-title">
             <button type="button" onClick={() => go(-1)} className="flex items-center gap-2 transition-colors hover:text-accent">
               <LuArrowLeft className="size-4" aria-hidden="true" />
               Previous
@@ -84,14 +85,15 @@ export default function ProjectModal({ projects, index, onNavigate, onClose }: P
 }
 
 function ProjectDetails({ project }: { project: Project }) {
-  const [activeImage, setActiveImage] = useState(0);
   const words = project.title.split(" ");
   const highlight = words.pop();
 
   return (
     <div className="grid gap-10 lg:grid-cols-2 xl:gap-16">
       <div>
-        <p className="text-xs font-semibold text-accent">{project.category}</p>
+        <p className="text-xs font-semibold text-accent">
+          {project.kind} · {project.category === "client" ? "Client project" : "Personal project"}
+        </p>
         <h2
           id="project-title"
           className="mt-3 font-display text-[clamp(2rem,1rem+3vw,3.75rem)] font-extrabold uppercase leading-[0.9] text-title"
@@ -101,12 +103,12 @@ function ProjectDetails({ project }: { project: Project }) {
         </h2>
         <span className="mt-5 block h-0.5 w-10 bg-rule" />
 
-        <p className="mt-5 max-w-xl text-sm leading-relaxed sm:text-base">{project.summary}</p>
+        <p className="mt-5 max-w-xl text-base leading-relaxed">{project.summary}</p>
 
         {project.highlights.length > 0 && (
           <ul className="mt-5 space-y-2.5">
             {project.highlights.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-title">
+              <li key={item} className="flex items-start gap-3 text-base text-title">
                 <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-rule" aria-hidden="true" />
                 {item}
               </li>
@@ -114,11 +116,11 @@ function ProjectDetails({ project }: { project: Project }) {
           </ul>
         )}
 
-        <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-border pt-6 text-sm">
+        <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-border pt-6 text-base">
           {[
             ["Role", project.role],
             ["Industry", project.industry],
-            ["Stack", project.stack],
+            ["Stack", project.stack.join(", ")],
           ].map(([label, value]) => (
             <div key={label}>
               <dt className="text-[11px] text-accent">{label}</dt>
@@ -127,25 +129,25 @@ function ProjectDetails({ project }: { project: Project }) {
           ))}
         </dl>
 
-        {(project.liveUrl || project.sourceUrl) && (
+        {(project.live || project.repo) && (
           <div className="mt-8 flex flex-wrap gap-3">
-            {project.liveUrl && (
+            {project.live && (
               <a
-                href={project.liveUrl}
+                href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-button px-5 py-2.5 text-xs font-semibold text-white transition-opacity hover:opacity-90"
+                className={`${buttonSweep} flex items-center gap-2 bg-button px-5 py-2.5 text-base font-semibold text-white [--sweep:var(--title)] hover:text-(--inverse-bg)`}
               >
                 <LuExternalLink className="size-3.5" aria-hidden="true" />
-                Live demo
+                Live site
               </a>
             )}
-            {project.sourceUrl && (
+            {project.repo && (
               <a
-                href={project.sourceUrl}
+                href={project.repo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 border border-border px-5 py-2.5 text-xs font-semibold text-title transition-colors hover:border-accent hover:text-accent"
+                className={`${buttonSweep} flex items-center gap-2 border border-border px-5 py-2.5 text-base font-semibold text-title [--sweep:var(--accent)] hover:border-accent hover:text-(--inverse-bg)`}
               >
                 <LuGithub className="size-3.5" aria-hidden="true" />
                 Source code
@@ -155,31 +157,9 @@ function ProjectDetails({ project }: { project: Project }) {
         )}
       </div>
 
-      {/* Pushed down on desktop so the close button never covers the image */}
+      {/* Pushed down on desktop so the close button never covers the screenshots */}
       <div className="lg:pt-10">
-        <ProjectShot
-          project={project}
-          image={project.images[activeImage]}
-          sizes="(min-width: 1024px) 40vw, 90vw"
-          className="aspect-16/11"
-        />
-
-        {project.images.length > 1 && (
-          <div className="mt-3 grid grid-cols-3 gap-3">
-            {project.images.map((image, i) => (
-              <button
-                key={image}
-                type="button"
-                onClick={() => setActiveImage(i)}
-                aria-label={`Show screenshot ${i + 1}`}
-                aria-pressed={i === activeImage}
-                className={`border-2 transition-colors ${i === activeImage ? "border-accent" : "border-transparent hover:border-border"}`}
-              >
-                <ProjectShot project={project} image={image} sizes="15vw" className="aspect-16/11" />
-              </button>
-            ))}
-          </div>
-        )}
+        <ProjectGallery project={project} />
       </div>
     </div>
   );

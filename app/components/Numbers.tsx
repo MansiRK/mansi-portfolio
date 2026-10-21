@@ -13,15 +13,17 @@ export default function Numbers() {
     <section
       id="numbers"
       aria-labelledby="numbers-title"
-      className="relative isolate scroll-mt-6 overflow-hidden bg-section-alt dark:bg-bg"
+      className="inverse-theme relative isolate scroll-mt-6 overflow-hidden bg-(--inverse-bg)"
     >
       {/* Background artwork sits below the content (z-0 vs z-10) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        <Orbits />
-        <span className="absolute bottom-0 right-0 size-14 bg-deco sm:size-20 lg:size-24" />
+        <span data-parallax="0.25" className="absolute right-0 top-0 size-16 bg-(--inverse-deco-big) sm:size-24" />
+        <span data-parallax="0.6" className="absolute right-16 top-16 size-8 bg-(--inverse-deco-small) sm:right-24 sm:top-24 sm:size-12" />
+        <Rings />
       </div>
 
-      <div className="site-container relative z-10 grid items-center gap-12 py-20 lg:grid-cols-2 lg:gap-12 lg:py-28">
+      {/* Extra top padding on desktop keeps the stats clear of the corner squares */}
+      <div className="site-container relative z-10 grid items-center gap-12 py-20 lg:grid-cols-2 lg:gap-12 lg:pb-28 lg:pt-40">
         <div data-reveal-group>
           {/* Slightly smaller on desktop so the title and the stats fit side by side */}
           <SectionTitle
@@ -30,7 +32,7 @@ export default function Numbers() {
             highlight="Numbers"
             className="lg:text-[clamp(2rem,0.25rem+4vw,5rem)]"
           />
-          <p className="mt-6 max-w-sm text-sm leading-relaxed text-text sm:text-base">
+          <p className="mt-6 max-w-sm text-base leading-relaxed text-text">
             A quick look at the work so far, and it keeps growing every month.
           </p>
         </div>
@@ -41,19 +43,17 @@ export default function Numbers() {
   );
 }
 
-/* Rings around a glowing dot in the bottom-left corner */
-function Orbits() {
+/* Concentric rings in the bottom-left corner with an accent arc and a dot */
+function Rings() {
   return (
-    <svg viewBox="0 0 320 320" data-parallax="0.15" className="absolute -bottom-16 -left-20 w-72 sm:w-80 lg:w-96">
-      <g fill="none" strokeWidth="1">
-        <circle cx="140" cy="200" r="70" className="stroke-title/25" strokeDasharray="3 5" />
-        <circle cx="140" cy="200" r="110" className="stroke-title/15" />
-        <circle cx="140" cy="200" r="150" className="stroke-title/10" strokeDasharray="3 5" />
+    <svg viewBox="0 0 360 360" data-parallax="0.15" className="absolute bottom-0 left-0 w-64 sm:w-80 lg:w-96">
+      <g fill="none" className="stroke-title/10" strokeWidth="1">
+        {[70, 140, 210, 280, 350].map((r) => (
+          <circle key={r} cx="0" cy="360" r={r} />
+        ))}
       </g>
-      <circle cx="140" cy="200" r="44" className="fill-accent/20 dark:fill-button/20" />
-      <circle cx="140" cy="200" r="26" className="fill-accent dark:fill-button" />
-      <circle cx="232" cy="122" r="5" className="fill-accent dark:fill-button" />
-      <circle cx="58" cy="96" r="3.5" className="fill-accent dark:fill-button" />
+      <path d="M0 290a70 70 0 0 1 70 70" fill="none" className="stroke-(--inverse-deco-small)" strokeWidth="5" />
+      <circle cx="148" cy="212" r="6" className="fill-accent" />
     </svg>
   );
 }

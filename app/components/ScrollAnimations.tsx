@@ -3,6 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { loaderDone } from "../lib/loader";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -12,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
  * - `data-hero`               banner intro, plays once on load (hidden by CSS until it runs)
  * - `data-hero-chars`         inside a `data-hero` word: each child letter rises in turn
  * - `data-reveal="up"`        fades/slides up when it scrolls into view
- * - `data-reveal="image"`     wipes in from the bottom with a slight zoom-out
+ * - `data-reveal="image"`     the <img> inside rises up into its frame while zooming in (the frame stays put)
  * - `data-reveal="line"`      draws in (timeline connectors)
  * - `data-reveal-group`       its children reveal one after another
  * - `data-parallax="0.2"`     background art drifts as you scroll (value = strength)
@@ -56,7 +57,9 @@ export default function ScrollAnimations() {
 }
 
 function heroIntro() {
-  const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.9 } });
+  // Built straight away (so the banner starts in its hidden state) but played once the loading screen lifts
+  const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out", duration: 0.9 } });
+  loaderDone.then(() => tl.play());
   const q = (name: string) => gsap.utils.toArray<HTMLElement>(`[data-hero="${name}"]`);
 
   tl.fromTo(q("header"), { autoAlpha: 0, y: -16 }, { autoAlpha: 1, y: 0, duration: 0.6 })
@@ -78,13 +81,17 @@ function reveals() {
     gsap.from(el, { autoAlpha: 0, y: 40, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: el, ...replay } });
   });
 
-  gsap.utils.toArray<HTMLElement>('[data-reveal="image"]').forEach((el) => {
-    gsap.from(el, {
-      clipPath: "inset(100% 0% 0% 0%)",
-      scale: 1.08,
-      duration: 1.2,
-      ease: "power3.inOut",
-      scrollTrigger: { trigger: el, ...replay },
+  gsap.utils.toArray<HTMLElement>('[data-reveal="image"]').forEach((frame) => {
+    const img = frame.querySelector("img");
+    if (!img) return;
+    gsap.from(img, {
+      yPercent: 45,
+      scale: 0.8,
+      autoAlpha: 0,
+      duration: 1.3,
+      ease: "power3.out",
+      transformOrigin: "50% 100%", // grow from the bottom, where the figure sits
+      scrollTrigger: { trigger: frame, ...replay },
     });
   });
 

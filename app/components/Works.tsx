@@ -2,16 +2,28 @@
 
 import { useState } from "react";
 import { LuArrowRight } from "react-icons/lu";
-import { FILTERS, PROJECTS, type ProjectFilter } from "../lib/projects";
+import { PROJECTS, type Project } from "../lib/projects";
+import { buttonSweep } from "../lib/ui";
 import ProjectModal from "./ProjectModal";
 import ProjectShot from "./ProjectShot";
 import SectionHeading from "./SectionHeading";
 
+type Filter = Project["category"] | "all";
+
+// Built from each project's `category`, so the counts stay right as projects are added
+const FILTERS: { value: Filter; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "client", label: "Client work" },
+  { value: "personal", label: "Personal projects" },
+];
+
+const MAX_TAGS = 3;
+
 export default function Works() {
-  const [filter, setFilter] = useState<ProjectFilter | "all">("all");
+  const [filter, setFilter] = useState<Filter>("all");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const visible = filter === "all" ? PROJECTS : PROJECTS.filter((p) => p.filter === filter);
+  const visible = filter === "all" ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
 
   return (
     <section
@@ -28,7 +40,7 @@ export default function Works() {
 
       <div role="group" aria-label="Filter projects" data-reveal="up" className="mt-10 flex flex-wrap gap-2">
         {FILTERS.map(({ value, label }) => {
-          const count = value === "all" ? PROJECTS.length : PROJECTS.filter((p) => p.filter === value).length;
+          const count = value === "all" ? PROJECTS.length : PROJECTS.filter((p) => p.category === value).length;
           const active = filter === value;
 
           return (
@@ -37,10 +49,10 @@ export default function Works() {
               type="button"
               aria-pressed={active}
               onClick={() => setFilter(value)}
-              className={`border px-4 py-2 text-xs font-semibold transition-colors ${
+              className={`${buttonSweep} border px-4 py-2 text-sm font-semibold uppercase hover:cursor-pointer ${
                 active
                   ? "border-title bg-title text-bg dark:border-accent dark:bg-accent"
-                  : "border-border text-title hover:border-title dark:text-accent dark:hover:border-accent"
+                  : "border-border text-title [--sweep:var(--chip-bg)] hover:border-title dark:text-accent dark:hover:border-accent"
               }`}
             >
               {label} <span className="ml-1 opacity-60">{count}</span>
@@ -51,16 +63,16 @@ export default function Works() {
 
       <ul data-reveal-group className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((project, index) => (
-          <li key={project.title}>
+          <li key={project.slug}>
             <button
               type="button"
               onClick={() => setOpenIndex(index)}
               aria-haspopup="dialog"
-              className="group block w-full text-left"
+              className="group block w-full text-left hover:cursor-pointer"
             >
               <ProjectShot
                 project={project}
-                image={project.images[0]}
+                image={project.cover ?? project.gallery?.[0]?.desktop}
                 sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
                 className="aspect-16/10 transition-transform duration-300 group-hover:-translate-y-1"
               />
@@ -70,9 +82,9 @@ export default function Works() {
                   {String(PROJECTS.indexOf(project) + 1).padStart(2, "0")}
                 </span>
                 <div className="flex-1">
-                  <h3 className="text-base font-semibold text-title">{project.title}</h3>
-                  <p className="text-xs text-text">
-                    {project.category}, {project.industry}
+                  <h3 className="text-lg font-semibold text-title uppercase">{project.title}</h3>
+                  <p className="text-sm text-text">
+                    {project.kind}, {project.industry}
                   </p>
                 </div>
                 <span className="grid size-8 shrink-0 place-items-center border border-border text-title transition-colors group-hover:border-button group-hover:bg-button group-hover:text-white">
@@ -81,11 +93,14 @@ export default function Works() {
               </div>
 
               <ul className="mt-3 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <li key={tag} className="bg-chip-bg px-2.5 py-1 text-[11px] font-semibold text-title dark:text-accent">
+                {project.stack.slice(0, MAX_TAGS).map((tag) => (
+                  <li key={tag} className="bg-chip-bg px-2.5 py-1 text-xs font-semibold text-title dark:text-accent">
                     {tag}
                   </li>
                 ))}
+                {project.stack.length > MAX_TAGS && (
+                  <li className="px-1 py-1 text-xs font-semibold text-text">+{project.stack.length - MAX_TAGS}</li>
+                )}
               </ul>
             </button>
           </li>

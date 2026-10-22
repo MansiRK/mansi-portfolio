@@ -21,14 +21,31 @@ const siteUrl =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000");
 
+const title = "Mansi Kamble | Full Stack Developer Portfolio";
+const description =
+  "I build fast, SEO-friendly web apps, CMS platforms and dashboards that clients run in production.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  // 35 characters
-  title: "Mansi Kamble | MERN Stack Developer",
-  description:
-    "I build fast, SEO-friendly web apps, CMS platforms and dashboards that clients run in production.",
+  title,
+  description,
   alternates: {
     canonical: "/",
+  },
+  // Link previews on LinkedIn, WhatsApp, Slack, Facebook and so on. The image comes from
+  // app/opengraph-image.tsx, which Next.js adds automatically.
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Mansi Kamble",
+    title,
+    description,
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
   },
   robots: {
     index: true,

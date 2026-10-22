@@ -109,9 +109,10 @@ function CodeCard() {
       <pre className="overflow-x-auto px-4 py-4 leading-relaxed text-white/90">
         <code>
           <span className="text-pink-400">const</span> mansi = {"{"}
-          {"\n  "}role: <span className="text-violet-200">&apos;MERN Developer&apos;</span>,
+          {"\n  "}role: <span className="text-violet-200">&apos;Full stack Developer&apos;</span>,
           {"\n  "}stack: [<span className="text-violet-200">&apos;Next.js&apos;</span>,{" "}
           <span className="text-violet-200">&apos;Node&apos;</span>,{" "}
+          <span className="text-violet-200">&apos;React.js&apos;</span>,{" "}
           <span className="text-violet-200">&apos;MongoDB&apos;</span>],
           {"\n  "}experience: <span className="text-violet-200">&apos;2.5+ years&apos;</span>,
           {"\n  "}available: <span className="text-orange-400">true</span>

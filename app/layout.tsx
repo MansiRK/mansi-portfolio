@@ -21,9 +21,9 @@ const siteUrl =
     : "http://localhost:3000");
 
 const title = "Mansi Kamble | Full Stack Developer Portfolio";
-// ~160 characters: the most Google shows in search results before cutting it off
+// Keep between 70 and 155 characters (currently 146)
 const description =
-  "Full stack developer in Mumbai with 2.5+ years of experience building fast, SEO-friendly web apps, CMS platforms and dashboards with React, Next.js and Node.js.";
+  "Full stack developer in Mumbai with 2.5+ years building fast, SEO-friendly web apps, CMS platforms and dashboards with React, Next.js and Node.js.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

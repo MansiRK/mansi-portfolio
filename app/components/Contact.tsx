@@ -80,7 +80,7 @@ export default function Contact() {
 /* Dotted flight path ending in a paper plane, under the contact details on desktop */
 function PaperPlanePath() {
   return (
-    <svg viewBox="0 0 260 110" data-parallax="0.3" className="mt-auto hidden w-64 pt-10 lg:block" aria-hidden="true">
+    <svg viewBox="0 0 260 110" data-parallax="0.3" className="mt-auto mb-6 w-44 pt-8 sm:w-56 lg:mb-0 lg:w-64 lg:pt-10" aria-hidden="true">
       <path
         d="M4 100c30-6 44-40 74-40s36 38 64 34 32-50 66-58"
         fill="none"

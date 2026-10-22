@@ -5,7 +5,7 @@ export type Project = {
   slug: string;
   title: string;
   category: "client" | "personal";
-  kind: "Full-stack" | "Frontend" | "Backend" | "Dashboard";
+  kind: "Full-stack" | "Frontend" | "Backend" | "Dashboard" | "Backend and Frontend Integration";
   industry: string;
   role: string;
   summary: string;
@@ -166,6 +166,39 @@ export const PROJECTS: Project[] = [
       },
     ],
   },
+      {
+    slug: "shivalik-ventures",
+    title: "Shivalik Ventures",
+    category: "client",
+    kind: "Full-stack",
+    industry: "Real estate",
+    role: "Full-stack developer",
+    summary:
+      "Built the backend, REST APIs and admin panel for a real estate developer's website, and integrated them with the frontend so all content is managed dynamically.",
+    highlights: [
+      "Designed the Node.js and Express backend with REST APIs backed by MongoDB",
+      "Admin panel for managing projects, pages and media without touching code",
+      "Integrated the APIs with the React.js website for dynamic project listings and detail pages",
+      "Project images and media stored and served from AWS S3",
+    ],
+    stack: ["React.js", "Node.js", "Express.js", "MongoDB", "REST API", "AWS S3"],
+    live: "https://www.shivalikventures.com",
+    cover: "/images/projects/shivalik/home.png",
+    gallery: [
+      {
+        title: "Home",
+        desktop: "/images/projects/shivalik/home.png",
+        mobile: "/images/projects/shivalik/home-mob.png",
+      },
+      { title: "About", desktop: "/images/projects/shivalik/about.png" },
+      {
+        title: "Projects",
+        desktop: "/images/projects/shivalik/proj.png",
+        mobile: "/images/projects/shivalik/proj-mob.png",
+      },
+      { title: "Project details", desktop: "/images/projects/shivalik/proj-detail.png" },
+    ],
+  },
   {
     slug: "my-manas",
     title: "My Manas Foundation",
@@ -197,39 +230,7 @@ export const PROJECTS: Project[] = [
       { title: "Donate", desktop: "/images/projects/mymanas/donate.png" },
     ],
   },
-  {
-    slug: "user-data-management",
-    title: "User Data Management",
-    category: "personal",
-    kind: "Dashboard",
-    industry: "Admin tools",
-    role: "Personal project",
-    summary:
-      "A CRUD admin app for managing user records: add, view, edit and delete users from a single table.",
-    highlights: [
-      "Full create, read, update and delete flow for user records",
-      "Data table with quick view, edit and delete actions on every row",
-      "Shared form for adding and editing users, with city and country dropdowns",
-      "Detail page for each user and a fully responsive layout",
-    ],
-    stack: ["React.js", "Firebase", "REST API"],
-    live: "https://user-data-management-app.web.app/",
-    cover: "/images/projects/user-data/home.png",
-    gallery: [
-      {
-        title: "All users",
-        desktop: "/images/projects/user-data/home.png",
-        mobile: "/images/projects/user-data/home-mob.png",
-      },
-      { title: "Add user", desktop: "/images/projects/user-data/add-user.png" },
-      {
-        title: "User details",
-        desktop: "/images/projects/user-data/view.png",
-        mobile: "/images/projects/user-data/view-mob.png",
-      },
-      { title: "Edit user", desktop: "/images/projects/user-data/edit-user.png" },
-    ],
-  },
+ 
   {
     slug: "product-management-system",
     title: "ShopEase Dashboard",
@@ -288,6 +289,39 @@ export const PROJECTS: Project[] = [
       { title: "Product", desktop: "/images/projects/shoprise/prod.png" },
       { title: "Wishlist", desktop: "/images/projects/shoprise/wishlist.png" },
       { title: "Cart", desktop: "/images/projects/shoprise/cart.png" },
+    ],
+  },
+   {
+    slug: "user-data-management",
+    title: "User Data Management",
+    category: "personal",
+    kind: "Dashboard",
+    industry: "Admin tools",
+    role: "Personal project",
+    summary:
+      "A CRUD admin app for managing user records: add, view, edit and delete users from a single table.",
+    highlights: [
+      "Full create, read, update and delete flow for user records",
+      "Data table with quick view, edit and delete actions on every row",
+      "Shared form for adding and editing users, with city and country dropdowns",
+      "Detail page for each user and a fully responsive layout",
+    ],
+    stack: ["React.js", "Firebase", "REST API"],
+    live: "https://user-data-management-app.web.app/",
+    cover: "/images/projects/user-data/home.png",
+    gallery: [
+      {
+        title: "All users",
+        desktop: "/images/projects/user-data/home.png",
+        mobile: "/images/projects/user-data/home-mob.png",
+      },
+      { title: "Add user", desktop: "/images/projects/user-data/add-user.png" },
+      {
+        title: "User details",
+        desktop: "/images/projects/user-data/view.png",
+        mobile: "/images/projects/user-data/view-mob.png",
+      },
+      { title: "Edit user", desktop: "/images/projects/user-data/edit-user.png" },
     ],
   },
   {

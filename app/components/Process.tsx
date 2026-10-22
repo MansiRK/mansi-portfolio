@@ -6,22 +6,22 @@ const STEPS: { Icon: IconType; title: string; description: string }[] = [
   {
     Icon: LuSearch,
     title: "Discover",
-    description: "I learn your goals, users and constraints, then agree on scope and success metrics.",
+    description: "I understand your goals, users and requirements, then agree on scope and timelines.",
   },
   {
     Icon: LuPenLine,
-    title: "Design",
-    description: "Wireframes, UI and system architecture, reviewed with you before a line of code.",
+    title: "Plan",
+    description: "Page flow, data structure and API plan, reviewed with you before development starts.",
   },
   {
     Icon: LuCodeXml,
     title: "Develop",
-    description: "Typed, tested code shipped in short iterations with a preview link every week.",
+    description: "Clean, reusable code built in short iterations, with preview links to review progress.",
   },
   {
     Icon: LuRocket,
     title: "Deploy",
-    description: "Launch, monitoring and handover, plus support while real users arrive.",
+    description: "Launch on Vercel, Render or AWS, followed by fixes, enhancements and ongoing support.",
   },
 ];
 

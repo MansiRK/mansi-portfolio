@@ -4,27 +4,27 @@ import SectionHeading from "./SectionHeading";
 const SERVICES: { icon: IconName; title: string; description: string; tags: string[] }[] = [
   {
     icon: "code",
-    title: "Web development",
+    title: "Frontend development",
     description: "Responsive, fast websites and web apps with React.js and Next.js, built mobile first.",
-    tags: ["React.js", "Next.js", "Tailwind"],
+    tags: ["React.js", "Next.js", "Tailwind CSS"],
   },
   {
     icon: "server",
     title: "Backend and APIs",
-    description: "REST APIs on Node.js and Express with JWT authentication, role-based access and secure headers.",
-    tags: ["Node.js", "JWT", "RBAC"],
+    description: "REST APIs on Node.js and Express with JWT authentication, role-based access and secure headers, deployed on AWS EC2, Vercel and Render.",
+    tags: ["Node.js", "Express.js", "AWS EC2"],
   },
   {
     icon: "layout",
     title: "CMS and admin dashboards",
     description: "Custom CMS modules and admin panels that let teams manage content, leads and media on their own.",
-    tags: ["CMS", "MongoDB", "Dashboards"],
+    tags: ["MongoDB", "Admin panels", "RBAC"],
   },
   {
     icon: "search",
     title: "SEO and performance",
     description: "Technical SEO and Core Web Vitals work: metadata, schema, sitemaps, GA4 and faster page loads.",
-    tags: ["SEO", "GA4", "Lighthouse"],
+    tags: ["Technical SEO", "GA4", "Lighthouse"],
   },
 ];
 

@@ -117,7 +117,7 @@ function ProjectDetails({ project }: { project: Project }) {
           </ul>
         )}
 
-        <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-border pt-6 text-base">
+        <dl className="mt-6 grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 border-t border-border pt-6 text-base">
           {[
             ["Role", project.role],
             ["Industry", project.industry],
@@ -136,17 +136,18 @@ function ProjectDetails({ project }: { project: Project }) {
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${buttonSweep} flex items-center gap-2 bg-button hover:cursor-pointer px-5 py-2.5 text-base font-semibold text-white [--sweep:var(--title)] hover:text-(--inverse-bg)`}
+              className={`${buttonSweep} flex items-center gap-2 bg-button hover:cursor-pointer px-4 py-2 text-sm font-semibold sm:px-5 sm:py-2.5 sm:text-base text-white [--sweep:var(--title)] hover:text-(--inverse-bg)`}
             >
-              <LuExternalLink className="size-3.5" aria-hidden="true" />
+              <LuExternalLink className="size-3 sm:size-3.5" aria-hidden="true" />
               Live site
             </a>
           </div>
         )}
       </div>
 
-      {/* Pushed down on desktop so the close button never covers the screenshots */}
-      <div className="lg:pt-10">
+      {/* Screenshots first on phones, beside the details from lg up. Pushed down so the close
+          button never covers them. */}
+      <div className="order-first pt-8 lg:order-none lg:pt-10">
         <ProjectGallery key={project.slug} project={project} />
       </div>
     </div>

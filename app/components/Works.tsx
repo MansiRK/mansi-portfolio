@@ -49,7 +49,7 @@ export default function Works() {
               type="button"
               aria-pressed={active}
               onClick={() => setFilter(value)}
-              className={`${buttonSweep} border px-4 py-2 text-sm font-semibold uppercase hover:cursor-pointer ${
+              className={`${buttonSweep} border px-3 py-1.5 text-xs font-semibold uppercase sm:px-4 sm:py-2 sm:text-sm hover:cursor-pointer ${
                 active
                   ? "border-title bg-title text-bg dark:border-accent dark:bg-accent"
                   : "border-border text-title [--sweep:var(--chip-bg)] hover:border-title dark:text-accent dark:hover:border-accent"

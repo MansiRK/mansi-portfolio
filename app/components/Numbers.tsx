@@ -4,7 +4,7 @@ import StatsGrid, { type Stat } from "./StatsGrid";
 const STATS: Stat[] = [
   { value: 2.5, decimals: 1, suffix: "+", label: "Years of experience" },
   { value: 100, suffix: "+", label: "API endpoints built" },
-  { value: 15, suffix: "+", label: "Clients partnered with" },
+  { value: 10, suffix: "+", label: "Clients partnered with" },
   { value: 500, suffix: "+", label: "Records in admin dashboards" },
 ];
 

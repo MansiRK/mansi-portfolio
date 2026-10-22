@@ -23,7 +23,7 @@ export default function About() {
           I’m a full-stack developer with 2.5+ years of experience building production websites and web apps with React, Next.js, Node.js and MongoDB.
         </p>
         <p className="mt-4 max-w-lg text-base leading-relaxed text-title sm:text-lg">
-          I’ve worked with 15+ clients across real estate, finance, manufacturing and media, building CMS platforms, admin dashboards and secure REST APIs. I care about speed, clean code and SEO that helps people actually find the work.
+          I’ve worked with 10+ clients across real estate, finance, manufacturing and media, building CMS platforms, admin dashboards and secure REST APIs. I care about speed, clean code and SEO that helps people actually find the work.
         </p>
 
         <SocialLinks className="mt-8" showEmail={false} />

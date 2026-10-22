@@ -60,18 +60,18 @@ export default function Banner() {
           <div data-hero="text" className="mt-6 flex flex-wrap gap-3">
             <a
               href="#works"
-              className={`${buttonSweep} flex items-center gap-2 bg-button px-5 py-2.5 text-base font-semibold text-white [--sweep:var(--title)] dark:hover:text-bg`}
+              className={`${buttonSweep} flex items-center gap-2 bg-button px-4 py-2 text-sm font-semibold sm:px-5 sm:py-2.5 sm:text-base text-white [--sweep:var(--title)] dark:hover:text-bg`}
             >
               View My Work
-              <LuArrowRight className="size-4" aria-hidden="true" />
+              <LuArrowRight className="size-3.5 sm:size-4" aria-hidden="true" />
             </a>
             {/* TODO: add the CV file to /public */}
             <a
-              href="/Mansi-Kamble-CV.pdf"
+              href="/docs/Mansi_Kamble_Full_Stack_Developer_Resume.pdf"
               download
-              className={`${buttonSweep} flex items-center gap-2 border border-title px-5 py-2.5 text-base font-semibold text-title [--sweep:var(--title)] hover:text-bg dark:border-accent dark:text-accent dark:[--sweep:var(--accent)] dark:hover:text-bg`}
+              className={`${buttonSweep} flex items-center gap-2 border border-title px-4 py-2 text-sm font-semibold sm:px-5 sm:py-2.5 sm:text-base text-title [--sweep:var(--title)] hover:text-bg dark:border-accent dark:text-accent dark:[--sweep:var(--accent)] dark:hover:text-bg`}
             >
-              <LuDownload className="size-3.5" aria-hidden="true" />
+              <LuDownload className="size-3 sm:size-3.5" aria-hidden="true" />
               Download Resume
             </a>
           </div>
@@ -109,7 +109,7 @@ function CodeCard() {
       <pre className="overflow-x-auto px-4 py-4 leading-relaxed text-white/90">
         <code>
           <span className="text-pink-400">const</span> mansi = {"{"}
-          {"\n  "}role: <span className="text-violet-200">&apos;Full stack Developer&apos;</span>,
+          {"\n  "}role: <span className="text-violet-200">&apos;Full Stack Developer&apos;</span>,
           {"\n  "}stack: [<span className="text-violet-200">&apos;Next.js&apos;</span>,{" "}
           <span className="text-violet-200">&apos;Node&apos;</span>,{" "}
           <span className="text-violet-200">&apos;React.js&apos;</span>,{" "}

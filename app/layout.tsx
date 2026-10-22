@@ -17,17 +17,35 @@ const syne = Syne({
 // (e.g. https://mansikamble.com); on Vercel it otherwise falls back to the project's production domain.
 const siteUrl =
   (process.env.PRODUCTION_URL
-    ? `https://${process.env.PRODUCTION_URL}`
+    ? `${process.env.PRODUCTION_URL}`
     : "http://localhost:3000");
 
 const title = "Mansi Kamble | Full Stack Developer Portfolio";
+// ~160 characters: the most Google shows in search results before cutting it off
 const description =
-  "I build fast, SEO-friendly web apps, CMS platforms and dashboards that clients run in production.";
+  "Full stack developer in Mumbai with 2.5+ years of experience building fast, SEO-friendly web apps, CMS platforms and dashboards with React, Next.js and Node.js.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title,
   description,
+  // Google ignores meta keywords, but Bing and some smaller search engines still read them
+  keywords: [
+    "Mansi Kamble",
+    "Full Stack Developer",
+    "MERN Stack Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Node.js Developer",
+    "Web Developer in Mumbai",
+    "Freelance Web Developer India",
+    "CMS Development",
+    "Admin Dashboard Development",
+    "SEO-friendly Websites",
+    "Portfolio",
+  ],
+  authors: [{ name: "Mansi Kamble" }],
+  creator: "Mansi Kamble",
   alternates: {
     canonical: "/",
   },

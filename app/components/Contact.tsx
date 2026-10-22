@@ -62,10 +62,11 @@ export default function Contact() {
             ))}
           </ul>
 
-          <PaperPlanePath />
+          <PaperPlanePath className="hidden lg:block" />
         </div>
 
         <ContactForm />
+        <PaperPlanePath className="lg:hidden" />
       </section>
 
       <footer className="site-container">
@@ -77,10 +78,10 @@ export default function Contact() {
   );
 }
 
-/* Dotted flight path ending in a paper plane, under the contact details on desktop */
-function PaperPlanePath() {
+/* Dotted flight path ending in a paper plane: under the contact details on desktop, after the form on phones */
+function PaperPlanePath({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 260 110" data-parallax="0.3" className="mt-auto mb-6 w-44 pt-8 sm:w-56 lg:mb-0 lg:w-64 lg:pt-10" aria-hidden="true">
+    <svg viewBox="0 0 260 110" data-parallax="0.3" className={`mt-auto w-44 sm:w-56 lg:w-64 lg:pt-10 ${className}`} aria-hidden="true">
       <path
         d="M4 100c30-6 44-40 74-40s36 38 64 34 32-50 66-58"
         fill="none"

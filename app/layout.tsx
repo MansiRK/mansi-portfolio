@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   // Link previews on LinkedIn, WhatsApp, Slack, Facebook and so on. The image comes from
-  // app/opengraph-image.tsx, which Next.js adds automatically.
+  // app/opengraph-image.png, which Next.js adds automatically.
   openGraph: {
     type: "website",
     url: "/",

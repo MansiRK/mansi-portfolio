@@ -14,7 +14,7 @@ const EXPERIENCE: TimelineItem[] = [
     title: "MERN Developer",
     place: "Five Online Website Solutions Pvt Ltd, Mumbai",
     description:
-      "Built and maintained production apps for finance, real estate and media clients: 100+ REST API endpoints with JWT and RBAC, admin dashboards for 500+ records, and 30 to 40% faster page loads. Partnered with 15+ clients and mentored junior developers.",
+      "Built and maintained production apps for finance, real estate and media clients: 100+ REST API endpoints with JWT and RBAC, admin dashboards for 500+ records, and 30 to 40% faster page loads. Partnered with 10+ clients and mentored junior developers.",
   },
   {
     badge: "Sep 2023 to Oct 2023",
